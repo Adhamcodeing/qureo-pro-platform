@@ -1,0 +1,1431 @@
+{
+  "course": "python_short_ar",
+  "grade": 2,
+  "total_chapters": 25,
+  "chapters": [
+    {
+      "n": 1,
+      "id": 511001,
+      "title": "مقدمة",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511001010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لطباعة \"Hello\" في وحدة التحكم.",
+          "answer": "print(\"Hello\")",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511001020,
+          "type": "description",
+          "prompt": "يرجى إنشاء البرنامج كما هو موضح أدناه.\n\n(1) تتم طباعة \"Good morning\" في وحدة التحكم\n\nنسخ النص: Good morning",
+          "answer": "",
+          "code": "print(\"Good morning\")"
+        },
+        {
+          "n": 3,
+          "id": 511001030,
+          "type": "description",
+          "prompt": "يرجى إنشاء البرنامج كما هو موضح أدناه.\n\n(1) اطبع \"programming\" في وحدة التحكم\n\nنسخ النص: programming",
+          "answer": "",
+          "code": "print(\"programming\")"
+        },
+        {
+          "n": 4,
+          "id": 511001040,
+          "type": "description",
+          "prompt": "يرجى إنشاء البرنامج كما هو موضح أدناه.\n\n(1) اطبع \"hello\" في وحدة التحكم\n\nنسخ النص: hello",
+          "answer": "",
+          "code": "print(\"hello\")"
+        },
+        {
+          "n": 5,
+          "id": 511001050,
+          "type": "choice",
+          "prompt": "يرجى اختيار الطريقة الصحيحة لكتابة تعليق.",
+          "answer": "#Write a comment here",
+          "code": ""
+        },
+        {
+          "n": 6,
+          "id": 511001060,
+          "type": "description",
+          "prompt": "علّق البرنامج بحيث تكون الطباعة كما هو موضح أدناه.\nHello\nMy name is\nCody",
+          "answer": "",
+          "code": "print(\"Hello\")\nprint(\"My name is\")\n#print(\"Riki\")\nprint(\"Cody\")"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "id": 511002,
+      "title": "الحسابات والنصوص",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511002010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لطباعة نتيجة حساب \"50+100\" في وحدة التحكم.",
+          "answer": "print(50 + 100)",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511002020,
+          "type": "choice",
+          "prompt": "اختر رمز القسمة الصحيح الذي يستخدم في البرنامج.",
+          "answer": "/",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511002030,
+          "type": "description",
+          "prompt": "اجعل الكمبيوتر يحسب \"19+40\" ويطبع نتيجة الحساب في وحدة التحكم.",
+          "answer": "",
+          "code": "print(19 + 40)"
+        },
+        {
+          "n": 4,
+          "id": 511002040,
+          "type": "description",
+          "prompt": "اجعل الكمبيوتر يحسب \"7-2\" ويطبع نتيجة الحساب في وحدة التحكم.",
+          "answer": "",
+          "code": "print(7 - 2)"
+        },
+        {
+          "n": 5,
+          "id": 511002050,
+          "type": "description",
+          "prompt": "اجعل الكمبيوتر يحسب \"15÷5\" ويطبع نتيجة الحساب في وحدة التحكم.",
+          "answer": "",
+          "code": "print(15 / 5)"
+        },
+        {
+          "n": 6,
+          "id": 511002060,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لطباعة \"Today is the 17th. 7 days ago was the 10th.\" في وحدة التحكم.",
+          "answer": "print(\"Today is the 17th. 7 days ago was the \" + str(17 - 7) + \"th.\")",
+          "code": ""
+        },
+        {
+          "n": 7,
+          "id": 511002070,
+          "type": "description",
+          "prompt": "اجعل الكمبيوتر يحسب \"2*5\" ويطبع \"The answer is 10\" في وحدة التحكم.",
+          "answer": "",
+          "code": "print(\"The answer is \" + str(2 * 5))"
+        },
+        {
+          "n": 8,
+          "id": 511002080,
+          "type": "choice",
+          "prompt": "اختر نوع البيانات الصحيح لما يلي.\n\nprint(\"50+30\")",
+          "answer": "نوع السلسلة النصية",
+          "code": ""
+        },
+        {
+          "n": 9,
+          "id": 511002090,
+          "type": "choice",
+          "prompt": "اختر البرنامج الذي يطبع \"<class 'str'>\" بشكل صحيح.",
+          "answer": "print(type(\"1\"))",
+          "code": ""
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "id": 511003,
+      "title": "المتغيرات",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511003010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لإنشاء المتغير score.",
+          "answer": "score = 0",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511003020,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لطباعة قيمة المتغير score في وحدة التحكم.\n*المتغير score لديه قيمة بالفعل.",
+          "answer": "print(score)",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511003030,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\n(1) أسند 0 إلى المتغير number\n*حتى إذا ضغطت \"تشغيل الكود\"، فلن تتم طباعة أي شيء في وحدة التحكم.\nبعد الإدخال، انقر على \"إجابة\".",
+          "answer": "",
+          "code": "number = 0"
+        },
+        {
+          "n": 4,
+          "id": 511003040,
+          "type": "description",
+          "prompt": "في السطر الثاني، اكتب برنامجًا كما يلي.\n\n(1) أسند 100 إلى المتغير number\n*حتى إذا ضغطت \"تشغيل الكود\"، فلن تتم طباعة أي شيء في وحدة التحكم.\nبعد الإدخال، انقر على \"إجابة\".",
+          "answer": "",
+          "code": "number = 0\nnumber = 100"
+        },
+        {
+          "n": 5,
+          "id": 511003050,
+          "type": "description",
+          "prompt": "في السطر الثالث، أدخل برنامجًا كما يلي.\n\n(1) اطبع قيمة المتغير number في وحدة التحكم",
+          "answer": "",
+          "code": "number = 0\nnumber = 10\nprint(number)"
+        },
+        {
+          "n": 6,
+          "id": 511003060,
+          "type": "description",
+          "prompt": "ابتداء من السطر الثاني، أدخل برنامجًا كما يلي.\n\n(1) أسند إلى المتغير number قيمته زائد 10\n(2) اطبع قيمة المتغير number في وحدة التحكم",
+          "answer": "",
+          "code": "number = 3\nnumber = number + 10\nprint(number)"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "id": 511004,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511004010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لطباعة \"Hello\" في وحدة التحكم.",
+          "answer": "print(\"Hello\")",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511004020,
+          "type": "description",
+          "prompt": "اطبع \"hello\" في وحدة التحكم.\n\nنسخ النص: hello",
+          "answer": "",
+          "code": "print(\"hello\")"
+        },
+        {
+          "n": 3,
+          "id": 511004030,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\nحوّل الجملة \"Leave this text\" إلى تعليق.\n*عند التنفيذ، ستتم طباعة الرسالة \"Make the first line a comment\".",
+          "answer": "",
+          "code": "#Leave this text\nprint(\"Make the first line a comment\")"
+        },
+        {
+          "n": 4,
+          "id": 511004040,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح الذي يجعل الكمبيوتر يحسب \"5+7\" ويطبع نتيجة الحساب في وحدة التحكم.",
+          "answer": "print(5 + 7)",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511004050,
+          "type": "choice",
+          "prompt": "اختر رمز الضرب الصحيح المستخدم في البرنامج.",
+          "answer": "*",
+          "code": ""
+        },
+        {
+          "n": 6,
+          "id": 511004060,
+          "type": "description",
+          "prompt": "اجعل الكمبيوتر يحسب \"3*4\" ويطبع \"The answer is 12\" في وحدة التحكم.",
+          "answer": "",
+          "code": "print(\"The answer is \" + str(3 * 4))"
+        },
+        {
+          "n": 7,
+          "id": 511004070,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لإنشاء المتغير number.",
+          "answer": "number = 0",
+          "code": ""
+        },
+        {
+          "n": 8,
+          "id": 511004080,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\n(1) أسند 5 إلى num\n(2) اطبع قيمة num في وحدة التحكم",
+          "answer": "",
+          "code": "num = 5\nprint(num)"
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "id": 511005,
+      "title": "جملة if",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511005010,
+          "type": "choice",
+          "prompt": "اختر الشكل الصحيح لبرنامج \"إذا...، فافعل شيئا\".",
+          "answer": "if condition:\n    process",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511005020,
+          "type": "choice",
+          "prompt": "اختر التعبير الشرطي \"قيمة المتغير num تساوي 50\".",
+          "answer": "num == 50",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511005030,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\n(1) أسند 100 إلى المتغير num\n(2) إذا كان المتغير num يساوي 100، فاطبع \"Correct\"\n\nنسخ النص: Correct",
+          "answer": "",
+          "code": "num = 100\nif num == 100:\n    print(\"Correct\")"
+        },
+        {
+          "n": 4,
+          "id": 511005040,
+          "type": "choice",
+          "prompt": "اختر نتيجة الطباعة للبرنامج التالي.\n\nnum = 200\nprint(num == 100)",
+          "answer": "False",
+          "code": ""
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "id": 511006,
+      "title": "جمل if - else",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511006010,
+          "type": "choice",
+          "prompt": "اختر الشكل الصحيح للبرنامج: إذا كان ~ فافعل A، وإلا فافعل B.",
+          "answer": "if condition:\n    A\nelse:\n    B",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511006020,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\n(1) أسند 5 إلى المتغير num\n(2) إذا كان المتغير num يساوي 10، فاطبع \"Win\"\n(3) إذا لم يكن كذلك، فاطبع \"No prize\".\n\nنسخ النص: Win No prize",
+          "answer": "",
+          "code": "num = 5\nif num == 10:\n    print(\"Win\")\nelse:\n    print(\"No prize\")"
+        },
+        {
+          "n": 3,
+          "id": 511006030,
+          "type": "choice",
+          "prompt": "اختر البرنامج الذي يحتوي على التعبير الشرطي \"قيمة المتغير num تساوي 80 أو أقل\".",
+          "answer": "num <= 80",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511006040,
+          "type": "choice",
+          "prompt": "اختر البرنامج الذي يحتوي على التعبير الشرطي \"قيمة المتغير num أكبر من 30\".",
+          "answer": "num > 30",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511006050,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\n(1) إذا كانت قيمة المتغير score تساوي 60 أو أكبر، فاطبع \"Pass\"، وإلا فاطبع \"Fail\".\n\n*لا تحذف البرنامج المكتوب مسبقا، بل أدخل جزء التعبير الشرطي.",
+          "answer": "",
+          "code": "score = 80\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")"
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "id": 511007,
+      "title": "جمل elif",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511007010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الذي يقول: \"إذا... فافعل A. وإلا، إذا... فافعل B.\"",
+          "answer": "if condition:\n    A\nelif condition:\n    B",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511007020,
+          "type": "description",
+          "prompt": "من السطر بعد print(\"It's 1\")، أدخل البرنامج كما هو موضح أدناه.\n\n(1) وإلا، إذا كان المتغير num يساوي 2، فاطبع \"It's 2\"\n\nنسخ النص: It's 2",
+          "answer": "",
+          "code": "num = 2\nif num == 1:\n    print(\"It's 1\")\nelif num == 2:\n    print(\"It's 2\")"
+        },
+        {
+          "n": 3,
+          "id": 511007030,
+          "type": "description",
+          "prompt": "أدخل البرنامج كما هو موضح أدناه، بدءا من السطر بعد print(\"Perfect score\").\n\n(1) وإلا، إذا كانت قيمة المتغير score تساوي 80 أو أكثر، فاطبع \"Pass\"\n\nنسخ النص: Pass",
+          "answer": "",
+          "code": "score = 82\nif score == 100:\n    print(\"Perfect score\")\nelif score >= 80:\n    print(\"Pass\")"
+        },
+        {
+          "n": 4,
+          "id": 511007040,
+          "type": "choice",
+          "prompt": "اختر نتيجة الطباعة عند تشغيل البرنامج أدناه.\nscore = 62\nif score == 100:\n    print(\"Perfect score\")\nelif score >= 80:\n    print(\"Pass\")\nelif score >= 60:\n    print(\"So close\")",
+          "answer": "So close",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511007050,
+          "type": "description",
+          "prompt": "أنشئ البرنامج كما هو موضح أدناه.\n\n(1) أسند 5 إلى المتغير egg\n(2) إذا كان المتغير egg يساوي 0، فاطبع \"Out of stock\"\n(3) وإلا، إذا كان المتغير egg يساوي 3 أو أقل، فاطبع \"Low stock\"\n(4) إذا لم يكن كذلك، فاطبع \"In stock\"\n\nنسخ النص: Out of stock Low stock In stock",
+          "answer": "",
+          "code": "egg = 5\nif egg == 0:\n    print(\"Out of stock\")\nelif egg <= 3:\n    print(\"Low stock\")\nelse:\n    print(\"In stock\")"
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "id": 511008,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511008010,
+          "type": "description",
+          "prompt": "أنشئ البرنامج كما هو موضح أدناه.\n\n(1) أسند 7 إلى المتغير num\n(2) إذا كان المتغير num يساوي 7، فاطبع \"Win\"\n\nنسخ النص: Win",
+          "answer": "",
+          "code": "num = 7\nif num == 7:\n    print(\"Win\")"
+        },
+        {
+          "n": 2,
+          "id": 511008020,
+          "type": "choice",
+          "prompt": "اختر نتيجة الطباعة عند تشغيل البرنامج أدناه.\nnum = 10\nprint(num == 10)",
+          "answer": "True",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511008030,
+          "type": "description",
+          "prompt": "أكمل السطر الثاني كما يلي.\n\n(1) إذا كانت قيمة المتغير score تساوي 60 أو أكثر، فاطبع \"Pass\"، وإلا فاطبع \"Fail\"\n*أدخل التعبير الشرطي فقط.",
+          "answer": "",
+          "code": "score = 70\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")"
+        },
+        {
+          "n": 4,
+          "id": 511008040,
+          "type": "choice",
+          "prompt": "اختر البرنامج الذي يحتوي على التعبير الشرطي \"قيمة المتغير num أقل من 20\".",
+          "answer": "num < 20",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511008050,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\n(1) أسند 100 إلى المتغير num\n(2) إذا كان المتغير num يساوي 100، فاطبع \"Win\"\n(3) وإلا، فاطبع \"No prize\"\n\nنسخ النص: Win No prize",
+          "answer": "",
+          "code": "num = 100\nif num == 100:\n    print(\"Win\")\nelse:\n    print(\"No prize\")"
+        },
+        {
+          "n": 6,
+          "id": 511008060,
+          "type": "choice",
+          "prompt": "اختر نتيجة الطباعة عند تشغيل البرنامج أدناه.\nscore = 92\nif score == 100:\n    print(\"Perfect score\")\nelif score >= 80:\n    print(\"Pass\")\nelif score >= 60:\n    print(\"So close\")",
+          "answer": "Pass",
+          "code": ""
+        },
+        {
+          "n": 7,
+          "id": 511008070,
+          "type": "description",
+          "prompt": "أنشئ البرنامج كما هو موضح أدناه.\n(1) أسند 4 إلى المتغير num\n(2) إذا كان المتغير num يساوي 3 أو أقل، فاطبع \"It's A\"\n(3) وإلا، إذا كان num يساوي 6 أو أكثر، فاطبع \"It's B\"\n(4) إذا لم يكن ذلك، فاطبع \"It's C\"\n\nنسخ النص: It's A It's B It's C",
+          "answer": "",
+          "code": "num = 4\nif num <= 3:\n    print(\"It's A\")\nelif num >= 6:\n    print(\"It's B\")\nelse:\n    print(\"It's C\")"
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "id": 511009,
+      "title": "العامل المنطقي",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511009010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الذي يعني \"يتحقق A وB معا\".",
+          "answer": "A and B",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511009020,
+          "type": "choice",
+          "prompt": "اختر البرنامج الذي يعني \"يتحقق A أو B\".",
+          "answer": "A or B",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511009030,
+          "type": "choice",
+          "prompt": "اختر نتيجة الطباعة للبرنامج التالي.\nage = 20\nif age <= 18 or age >= 60:\n    print(\"Save 20%\")\nelse:\n    print(\"Regular price\")",
+          "answer": "Regular price",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511009040,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\n(1) إذا كان المتغير a يساوي 5 أو كان b يساوي 10، فاطبع \"The condition is met\".\n*أدخل التعبير الشرطي فقط.",
+          "answer": "",
+          "code": "a = 5\nb = 10\n\nif a == 5 or b == 10:\n    print(\"The condition is met\")"
+        },
+        {
+          "n": 5,
+          "id": 511009050,
+          "type": "description",
+          "prompt": "أنشئ برنامجا كما يلي.\n\n(1) إذا كان المتغير a أكبر من أو يساوي 2 وكان b أكبر من أو يساوي 3، فاطبع \"The condition is met\".\n*أدخل التعبير الشرطي فقط.",
+          "answer": "",
+          "code": "a = 4\nb = 3\nif a >= 2 and b >= 3:\n    print(\"The condition is met\")"
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "id": 511010,
+      "title": "العملية التكرارية",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511010010,
+          "type": "choice",
+          "prompt": "عندما تقوم بكتابة \"تكرار طباعة كلمة apple على الشاشة 10 مرات\" كبرنامج، حدد ما تكتبه في بداية البرنامج.",
+          "answer": "for",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511010020,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لإضافة 1 إلى المتغير i في كل مرة.",
+          "answer": "i = i + 1",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511010030,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لتكرار معالجة محددة 10 مرات.",
+          "answer": "for i in range(10):\n    الكود الخاص بك",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511010040,
+          "type": "description",
+          "prompt": "أنشئ برنامجك كما يلي:\n\n(1) اعرض \"Hello\" على الشاشة خمس مرات.\n*استخدم \"i\" كاسم للمتغير، واستخدم range(5).\n\nنسخ النص: Hello",
+          "answer": "",
+          "code": "for i in range(5):\n    print(\"Hello\")"
+        },
+        {
+          "n": 5,
+          "id": 511010050,
+          "type": "description",
+          "prompt": "أنشئ برنامجك كما يلي:\n\n(1) اعرض \"Hello\" على الشاشة 7 مرات.\n*استخدم \"i\" كاسم للمتغير، واستخدم range(7).\n\nنسخ النص: Hello",
+          "answer": "",
+          "code": "for i in range(7):\n    print(\"Hello\")"
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "id": 511011,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511011010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الذي يعني \"يتحقق A أو B\".",
+          "answer": "A or B",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511011020,
+          "type": "choice",
+          "prompt": "اختر نتيجة تشغيل البرنامج التالي.\n\nnum = 9\nif num <= 3 or num >= 7:\n    print(\"It's A\")\nelse:\n    print(\"It's B\")",
+          "answer": "It's A",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511011030,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لإضافة 1 إلى المتغير i في كل مرة.",
+          "answer": "i = i + 1",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511011040,
+          "type": "choice",
+          "prompt": "اختر الخيار الصحيح لبرنامج يكرر عملية محددة 10 مرات.",
+          "answer": "for i in range(10):\n    العملية المحددة",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511011050,
+          "type": "choice",
+          "prompt": "اختر نتيجة تشغيل البرنامج التالي.\n\nfor i in range(2):\n    print(\"hello\")",
+          "answer": "hello\nhello",
+          "code": ""
+        },
+        {
+          "n": 6,
+          "id": 511011060,
+          "type": "description",
+          "prompt": "أنشئ برنامجك كما يلي:\n\n(1) اطبع \"Good morning\" على الشاشة 10 مرات.\n* استخدم \"i\" كاسم للمتغير وrange(10).\n\nنسخ النص: Good morning",
+          "answer": "",
+          "code": "for i in range(10):\n    print(\"Good morning\")"
+        },
+        {
+          "n": 7,
+          "id": 511011070,
+          "type": "description",
+          "prompt": "أنشئ برنامجك كما يلي:\n\n(1) إذا كانت قيمة المتغير a أكبر من أو تساوي 2، وقيمة المتغير b أكبر من أو تساوي 3، اطبع \"the condition is met\"\n* أدخل التعبير الشرطي فقط.",
+          "answer": "",
+          "code": "a = 4\nb = 3\nif a >= 2 and b >= 3:\n    print(\"the condition is met\")"
+        },
+        {
+          "n": 8,
+          "id": 511011080,
+          "type": "description",
+          "prompt": "أنشئ برنامجك كما يلي:\n\n(1) اطبع \"Hello\" على الشاشة ثلاث مرات.\n* استخدم \"i\" كاسم للمتغير وrange(3).\n\nنسخ النص: Hello",
+          "answer": "",
+          "code": "for i in range(3):\n    print(\"Hello\")"
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "id": 511012,
+      "title": "الدالة (1)",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511012010,
+          "type": "choice",
+          "prompt": "اختر الطريقة الصحيحة لكتابة دالة تقوم بتقريب عدد.",
+          "answer": "round(1.8)",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511012020,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لطباعة رقم عشوائي.\n* افترض أن عملية الاستيراد قد تمت بالفعل.",
+          "answer": "print(random.random())",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511012030,
+          "type": "choice",
+          "prompt": "اختر الطريقة الصحيحة لكتابة دالة تقوم بتقريب عدد عشري إلى الأسفل.",
+          "answer": "print(math.floor(10.5))",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511012040,
+          "type": "description",
+          "prompt": "أدخل برنامجك كما يلي:\n\n(1) استخدم دالة لتقريب العدد \"5.5\" وطباعته على الشاشة.\n(2) استخدم دالة لتقريب العدد العشري \"8.8\" إلى أقرب عدد صحيح أصغر، وطباعته على الشاشة.\n\nاستخدم الدالتين \"math.floor\" و\"round\".",
+          "answer": "",
+          "code": "import math\nprint(round(5.5))\nprint(math.floor(8.8))"
+        },
+        {
+          "n": 5,
+          "id": 511012050,
+          "type": "description",
+          "prompt": "أنشئ برنامجًا يطبع \"A bright day\" إذا كان الرقم العشوائي يساوي 0.5 أو أكثر، و\"Take it slow and do your best\" في غير ذلك.\n\nأدخل التعبير الشرطي لـ \"إذا كانت القيمة العشوائية تساوي 0.5 أو أكثر\".\nاستخدم الدالة \"random.random()\".",
+          "answer": "",
+          "code": "import random\nif random.random() >= 0.5:\n    print(\"A bright day\")\nelse:\n    print(\"Take it slow and do your best\")"
+        },
+        {
+          "n": 6,
+          "id": 511012060,
+          "type": "description",
+          "prompt": "أنشئ برنامجًا يُعيد عددًا صحيحًا عشوائيًا كما يلي:\n\n(1) استخدم الدالة \"random.random\" لإعادة عدد عشوائي.\n(2) اضرب العدد العشوائي الناتج في 10.\n(3) استخدم الدالة \"math.floor\" لإعادة عدد صحيح.",
+          "answer": "",
+          "code": "import math\nimport random\nprint(math.floor(random.random() * 10))"
+        }
+      ]
+    },
+    {
+      "n": 13,
+      "id": 511013,
+      "title": "الدالة (2)",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511013010,
+          "type": "choice",
+          "prompt": "اختر نتيجة البرنامج التالي.\n\nprint(max(20, 40, 60))",
+          "answer": "60",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511013020,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لإنشاء دالة باسم calc مع وسيط باسم num.",
+          "answer": "def calc(num):\n    المعالجة",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511013030,
+          "type": "choice",
+          "prompt": "حدد ما سيظهر على الشاشة بعد تشغيل البرنامج التالي.\n\ndef calc(num):\n    result = num * 3\n    return result\nprint(calc(5))",
+          "answer": "15",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511013040,
+          "type": "description",
+          "prompt": "أضف برنامجًا يستدعي الدالة \"calc\" ويطبع النتيجة.\nضع الرقم \"3\" كوسيط.",
+          "answer": "",
+          "code": "def calc(num):\n    result = num * 5\n    return result\nprint(calc(3))"
+        },
+        {
+          "n": 5,
+          "id": 511013050,
+          "type": "description",
+          "prompt": "أضف إلى البرنامج المكتوب برنامجًا يقوم بإرجاع قيمة المتغير \"result\".",
+          "answer": "",
+          "code": "def calc(num):\n    result = num * 7\n    return result\nprint(calc(10))"
+        }
+      ]
+    },
+    {
+      "n": 14,
+      "id": 511014,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511014010,
+          "type": "choice",
+          "prompt": "يرجى تحديد الدالة الصحيحة لتقريب العدد.",
+          "answer": "round(1.8)",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511014020,
+          "type": "choice",
+          "prompt": "حدد نتيجة تشغيل البرنامج التالي.\n\nprint(max(20, 40, 60))",
+          "answer": "60",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511014030,
+          "type": "choice",
+          "prompt": "يرجى اختيار البرنامج الصحيح لإخراج قيمة عددية عشوائية.\n* افترض أنه تم استيراده مسبقًا.",
+          "answer": "print(random.random())",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511014040,
+          "type": "choice",
+          "prompt": "اختر نتيجة تشغيل البرنامج أدناه.\n\nimport math\nprint(math.floor(12.8))",
+          "answer": "12",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511014050,
+          "type": "description",
+          "prompt": "أنشئ برنامجًا يُعيد عددًا صحيحًا عشوائيًا كما يلي:\n\n(1) استخدم الدالة \"random.random\" لإعادة قيمة عددية عشوائية.\n(2) اضرب القيمة العددية العشوائية المُعادة في 10.\n(3) استخدم الدالة \"math.floor\" لإعادة عدد صحيح.",
+          "answer": "",
+          "code": "import math\nimport random\nprint(math.floor(random.random() * 10))"
+        },
+        {
+          "n": 6,
+          "id": 511014060,
+          "type": "choice",
+          "prompt": "يرجى تحديد البرنامج الصحيح لإنشاء دالة اسمها calc واسم وسيطها num.",
+          "answer": "def calc(num):\n    المعالجة",
+          "code": ""
+        },
+        {
+          "n": 7,
+          "id": 511014070,
+          "type": "description",
+          "prompt": "أضف إلى البرنامج المكتوب سطرًا يُعيد قيمة المتغير \"result\".",
+          "answer": "",
+          "code": "def calc(num):\n    result = num * 7\n    return result\nprint(calc(10))"
+        },
+        {
+          "n": 8,
+          "id": 511014080,
+          "type": "description",
+          "prompt": "أضف برنامجًا يستدعي الدالة \"calc\".\nاستخدم \"3\" كوسيط.",
+          "answer": "",
+          "code": "def calc(num):\n    result = num * 5\n    return result\nprint(calc(3))"
+        }
+      ]
+    },
+    {
+      "n": 15,
+      "id": 511015,
+      "title": "المصفوفة (1)",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511015010,
+          "type": "description",
+          "prompt": "ضع القيم التالية في القائمة:\n5، 10، 15\n\n* لا يظهر أي ناتج حتى عند تشغيل البرنامج.",
+          "answer": "",
+          "code": "num = [5, 10, 15]"
+        },
+        {
+          "n": 2,
+          "id": 511015020,
+          "type": "choice",
+          "prompt": "اختر نتيجة تشغيل البرنامج التالي.\n\nnum = [5, 10, 15, 20, 25]\nprint(num[2])",
+          "answer": "15",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511015030,
+          "type": "description",
+          "prompt": "اعرض جميع القيم الموجودة في القائمة على الشاشة.\n* لا تُدخل القيم مباشرةً.\n* دون حذف البرنامج المكتوب، أضف ما بداخل أقواس print إلى البرنامج.",
+          "answer": "",
+          "code": "num = [5, 10, 15, 20, 25]\nprint(num)"
+        },
+        {
+          "n": 4,
+          "id": 511015040,
+          "type": "choice",
+          "prompt": "اختر نتيجة تشغيل البرنامج التالي.\n\nnum = [1, 2, 3]\nsum = 0\nfor i in range(3):\n    sum = sum + num[i]\nprint(sum)",
+          "answer": "6",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511015050,
+          "type": "description",
+          "prompt": "اعرض طول القائمة على الشاشة.\n* لا تُدخل رقم الطول مباشرةً.",
+          "answer": "",
+          "code": "num = [5, 10, 15, 20, 25]\nprint(len(num))"
+        }
+      ]
+    },
+    {
+      "n": 16,
+      "id": 511016,
+      "title": "المصفوفة (2)",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511016010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لإنشاء مصفوفة تحتوي على أعداد صحيحة فقط.",
+          "answer": "import array\nrank_array = array.array('i', [3, 1, 3, 2, 1])",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511016020,
+          "type": "choice",
+          "prompt": "اختر مخرجات البرنامج التالي.\n\nimport array\nteam_array = array.array('i', [10, 20, 30, 40, 50])\nprint(team_array[2])",
+          "answer": "30",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511016030,
+          "type": "description",
+          "prompt": "أدخل البرنامج كما يلي:\n\n(1) اكتب import array في بداية البرنامج.\n(2) أسند array.array('i', [1, 2, 3, 4, 5]) إلى المتغير round_array.\n(3) اطبع العنصرين 1 و4 من round_array في وحدة التحكم.",
+          "answer": "",
+          "code": "import array\nround_array = array.array('i', [1, 2, 3, 4, 5])\nprint(round_array[1])\nprint(round_array[4])"
+        },
+        {
+          "n": 4,
+          "id": 511016040,
+          "type": "choice",
+          "prompt": "اختر مخرجات البرنامج التالي.\n\nimport array\npoint_array = array.array('i', [8, 12, 15, 9, 11, 14])\nprint(len(point_array))",
+          "answer": "6",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511016050,
+          "type": "choice",
+          "prompt": "اختر مخرجات البرنامج التالي.\n\nimport numpy\nread_array = numpy.array([35, 50, 62])\nprint(read_array + 3)",
+          "answer": "[38 53 65]",
+          "code": ""
+        }
+      ]
+    },
+    {
+      "n": 17,
+      "id": 511017,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511017010,
+          "type": "choice",
+          "prompt": "حدد ناتج تشغيل البرنامج التالي.\n\nnum = [5, 10, 15, 20, 25]\nprint(num[2])",
+          "answer": "15",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511017020,
+          "type": "description",
+          "prompt": "اطبع جميع القيم الموجودة في القائمة على الشاشة.\n* لا تكتب القيم مباشرةً.\n* لا تحذف البرنامج المكتوب مسبقًا. أضف برنامجك داخل أقواس print.",
+          "answer": "",
+          "code": "num = [5, 10, 15, 20, 25]\nprint(num)"
+        },
+        {
+          "n": 3,
+          "id": 511017030,
+          "type": "choice",
+          "prompt": "حدد ناتج تشغيل البرنامج التالي.\n\nnum = [1, 2, 3]\nsum = 0\nfor i in range(3):\n    sum = sum + num[i]\nprint(sum)",
+          "answer": "6",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511017040,
+          "type": "choice",
+          "prompt": "حدد ناتج تشغيل البرنامج التالي.\n\nimport array\nteam_array = array.array('i', [10, 20, 30, 40, 50])\nprint(team_array[2])",
+          "answer": "30",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511017050,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لإنشاء مصفوفة من الأعداد الصحيحة فقط.",
+          "answer": "import array\nrank_array = array.array('i', [3, 1, 3, 2, 1])",
+          "code": ""
+        },
+        {
+          "n": 6,
+          "id": 511017060,
+          "type": "choice",
+          "prompt": "حدد ناتج تشغيل البرنامج التالي.\n\nimport array\npoint_array = array.array('i', [8, 12, 15, 9, 11, 14])\nprint(len(point_array))",
+          "answer": "6",
+          "code": ""
+        }
+      ]
+    },
+    {
+      "n": 18,
+      "id": 511018,
+      "title": "bool",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511018010,
+          "type": "choice",
+          "prompt": "اختر مخرجات البرنامج التالي من الخيارات المتاحة.\nTrue تعني تشغيل و False تعني إيقاف تشغيل لـ lamp_on.\n\nlamp_on = True\n\nif lamp_on:\n    print(\"ON\")\nelse:\n    print(\"OFF\")",
+          "answer": "ON",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511018020,
+          "type": "choice",
+          "prompt": "اختر مخرجات البرنامج التالي من الخيارات المتاحة.\n\nis_ready = False\nprint(type(is_ready))",
+          "answer": "<class 'bool'>",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511018030,
+          "type": "choice",
+          "prompt": "ما نوع بيانات القيمة المُسندة إلى المتغير team_name أدناه؟\n\nteam_name = \"False\"",
+          "answer": "str",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511018040,
+          "type": "choice",
+          "prompt": "اختر ناتج البرنامج التالي من الخيارات المتاحة.\n\ncan_play = False\n\nif can_play:\n    print(\"A\")\nelse:\n    print(\"B\")",
+          "answer": "B",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511018050,
+          "type": "choice",
+          "prompt": "يشغّل البرنامج التالي مصباح الغرفة أو يطفئه وفقًا للوقت الحالي.\nاختر ناتج هذا البرنامج من الخيارات المتاحة.\nفي المتغير lamp_on، تعني True أن المصباح يعمل، وتعني False أنه متوقف، وتمثل hour الوقت الحالي.\n\nlamp_on = False\nhour = 21\n\nif hour > 17 and hour < 23:\n    lamp_on = True\nelse:\n    lamp_on = False\n\nif lamp_on:\n    print(\"ON\")\nelse:\n    print(\"OFF\")",
+          "answer": "ON",
+          "code": ""
+        }
+      ]
+    },
+    {
+      "n": 19,
+      "id": 511019,
+      "title": "الدوال (3)",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511019010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح الذي يستخدم math.floor.",
+          "answer": "import math\nprint(math.floor(4.7))",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511019020,
+          "type": "choice",
+          "prompt": "اختر ناتج البرنامج التالي.\n\nimport math\nprint(math.floor(5.8))\nprint(round(5.8))",
+          "answer": "5\n6",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511019030,
+          "type": "choice",
+          "prompt": "اختر العبارة الصحيحة حول القيمة التي تم إرجاعها بواسطة random.random().",
+          "answer": "رقم من 0 إلى أقل من 1",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511019040,
+          "type": "description",
+          "prompt": "أنشئ برنامجًا يعرض عددًا صحيحًا عشوائيًا مكونًا من رقم واحد، كما يلي.\n\n(1) اكتب import math و import random\n(2) اعرض math.floor(random.random() * 10) على الشاشة",
+          "answer": "",
+          "code": "import math\nimport random\nprint(math.floor(random.random() * 10))"
+        },
+        {
+          "n": 5,
+          "id": 511019050,
+          "type": "description",
+          "prompt": "في البرنامج، أدخل تعبيرًا شرطيًا يعني «إذا كانت القيمة العشوائية 0.7 أو أكثر».\nاستخدم الدالة random.random().",
+          "answer": "",
+          "code": "import random\nif random.random() >= 0.7:\n    print(\"Grand prize\")\nelse:\n    print(\"Consolation prize\")"
+        }
+      ]
+    },
+    {
+      "n": 20,
+      "id": 511020,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511020010,
+          "type": "choice",
+          "prompt": "اختر مخرجات البرنامج التالي من الخيارات المتاحة.\nTrue تعني تشغيل و False تعني إيقاف تشغيل لـ lamp_on.\n\nlamp_on = True\n\nif lamp_on:\n    print(\"ON\")\nelse:\n    print(\"OFF\")",
+          "answer": "ON",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511020020,
+          "type": "choice",
+          "prompt": "ما هو نوع البيانات للقيمة المُسندة إلى المتغير team_name أدناه؟\n\nteam_name = \"False\"",
+          "answer": "str",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511020030,
+          "type": "choice",
+          "prompt": "اختر مخرجات البرنامج التالي من الخيارات المتاحة.\n\nis_ready = False\nprint(type(is_ready))",
+          "answer": "<class 'bool'>",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511020040,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح الذي يستخدم math.floor.",
+          "answer": "import math\nprint(math.floor(4.7))",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511020050,
+          "type": "description",
+          "prompt": "أنشئ برنامجًا يعرض عددًا صحيحًا عشوائيًا مكونًا من رقم واحد، كما يلي.\n\n(1) اكتب import math و import random\n(2) اعرض math.floor(random.random() * 10) على الشاشة",
+          "answer": "",
+          "code": "import math\nimport random\nprint(math.floor(random.random() * 10))"
+        },
+        {
+          "n": 6,
+          "id": 511020060,
+          "type": "description",
+          "prompt": "في البرنامج، أدخل تعبيرًا شرطيًا يعني «إذا كانت القيمة العشوائية 0.7 أو أكثر».\nاستخدم الدالة random.random().",
+          "answer": "",
+          "code": "import random\nif random.random() >= 0.7:\n    print(\"Grand prize\")\nelse:\n    print(\"Consolation prize\")"
+        }
+      ]
+    },
+    {
+      "n": 21,
+      "id": 511021,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511021010,
+          "type": "description",
+          "prompt": "أضف شرطًا ثانيًا إلى البرنامج الموضح،\nبحيث إذا كان A أصغر من B، فاطبع \"B is bigger\" على الشاشة.\nيجب أن يكون التعبير الشرطي الثاني هو \"A < B\".\n\nنسخ النص: B is bigger",
+          "answer": "",
+          "code": "A = 5\nB = 10\nif A > B:\n    print(\"A is bigger\")\nelif A < B:\n    print(\"B is bigger\")"
+        },
+        {
+          "n": 2,
+          "id": 511021020,
+          "type": "choice",
+          "prompt": "اختر العامل الصحيح الذي يعني «تحقق عدة شروط في الوقت نفسه».",
+          "answer": "and",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511021030,
+          "type": "choice",
+          "prompt": "حدد نتيجة تنفيذ البرنامج الآتي من بين الخيارات.\n\nx = 5\nif x > 10:\n    num = 100\nprint(num)",
+          "answer": "ينتج عنه خطأ",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511021040,
+          "type": "description",
+          "prompt": "أنشئ برنامجًا يطبع \"Math is 100 points\" إذا كانت قيمة math تساوي 100، ثم يطبع \"Math and English are 100 points\" إذا كانت قيمة english أيضًا تساوي 100.\nلا تستخدم and.\nنسخ النص: Math and English are 100 points",
+          "answer": "",
+          "code": "math = 100\nenglish = 100\nif math == 100:\n    print(\"Math is 100 points\")\n    if english == 100:\n        print(\"Math and English are 100 points\")"
+        },
+        {
+          "n": 5,
+          "id": 511021050,
+          "type": "description",
+          "prompt": "اكتب برنامجًا يقوم بما يلي.\n\n(1) اطبع \"Good morning\" على الشاشة 7 مرات باستخدام عبارة for\n* استخدم المتغير i\n\nنسخ النص: Good morning",
+          "answer": "",
+          "code": "for i in range(7):\n    print(\"Good morning\")"
+        },
+        {
+          "n": 6,
+          "id": 511021060,
+          "type": "choice",
+          "prompt": "حدد نتيجة تنفيذ البرنامج الآتي من بين الخيارات.\n\nfor i in range(4):\n    print(\"0\")\n    if i == 2:\n        print(\"1\")",
+          "answer": "00010",
+          "code": ""
+        },
+        {
+          "n": 7,
+          "id": 511021070,
+          "type": "choice",
+          "prompt": "اختر البرنامج المكافئ للعبارة \"i = i + 5\".",
+          "answer": "i += 5",
+          "code": ""
+        },
+        {
+          "n": 8,
+          "id": 511021080,
+          "type": "description",
+          "prompt": "لقد أنشأت دالة \"divide3\" تقسم القيمة إلى 3 أجزاء متساوية، لذا مرر القيمة \"12345\" إلى divide3 واطبع النتيجة على الشاشة.",
+          "answer": "",
+          "code": "def divide3(num):\n    result = num / 3\n    return result\nprint(divide3(12345))"
+        },
+        {
+          "n": 9,
+          "id": 511021090,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح لإنشاء الدالة motion بدون وسائط.",
+          "answer": "def motion():\n    process",
+          "code": ""
+        },
+        {
+          "n": 10,
+          "id": 511021100,
+          "type": "description",
+          "prompt": "أنشئ دالة mul تأخذ وسيطين.\n(1) أنشئ دالة باسم \"mul\" مع أسماء الوسائط \"num1\" و \"num2\"\n(2) أسند \"num1 * num2\" إلى المتغير \"result\"\n(3) أعد المتغير \"result\"\n(4) استدعِ الدالة mul مع الوسيطين \"9\" و\"7\" واطبع النتيجة على الشاشة.",
+          "answer": "",
+          "code": "def mul(num1, num2):\n    result = num1 * num2\n    return result\nprint(mul(9, 7))"
+        }
+      ]
+    },
+    {
+      "n": 22,
+      "id": 511022,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511022010,
+          "type": "description",
+          "prompt": "أنشئ برنامجًا يقوم بحساب \"7×7×7×7×7\".\nاكتب البرنامج على النحو التالي.\n(1) أنشئ المتغير num وأسند إليه القيمة 1\n(2) كرر العملية الحسابية \"num = num * 7\" خمس مرات\n* بالنسبة لعبارة for، استخدم range(5) بحيث تتكرر 5 مرات.\n(3) في النهاية، اطبع قيمة المتغير num على الشاشة مرة واحدة",
+          "answer": "",
+          "code": "num = 1\nfor i in range(5):\n    num = num * 7\nprint(num)"
+        },
+        {
+          "n": 2,
+          "id": 511022020,
+          "type": "choice",
+          "prompt": "اختر الخيار الذي يوضح بصورة صحيحة كيفية تغير قيمة المتغير i في البرنامج الآتي.\n\nnum = 1\nfor i in range(1, 8):\n    num = num * 2\nprint(num)",
+          "answer": "1->2->3->4->5->6->7",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511022030,
+          "type": "description",
+          "prompt": "ستقوم بإنشاء برنامج يقوم بحساب \"5040/1/2/3/4/5\".\nاكتب البرنامج على النحو التالي.\n(1) أنشئ المتغير num وأسند إليه القيمة 5040\n(2) كرر إسناد ناتج «قسمة المتغير num على i» إلى المتغير num خمس مرات\n* بالنسبة لعبارة for، استخدم range(1, 6) بحيث يتغير المتغير i من 1 إلى 5 بالترتيب.\n(3) في النهاية، اطبع قيمة المتغير num على الشاشة مرة واحدة",
+          "answer": "",
+          "code": "num = 5040\nfor i in range(1, 6):\n    num = num / i\nprint(num)"
+        },
+        {
+          "n": 4,
+          "id": 511022040,
+          "type": "description",
+          "prompt": "أدخل برنامجًا يقوم بطباعة القيمة \"57\" من المتغير mark_list على الشاشة.\nلا تكتب \"57\" مباشرة.",
+          "answer": "",
+          "code": "mark_list = [48, 55, 74, 85, 63, 57, 91]\nprint(mark_list[5])"
+        },
+        {
+          "n": 5,
+          "id": 511022050,
+          "type": "description",
+          "prompt": "أدخل برنامجًا يقوم بطباعة عدد القيم الموجودة في المتغير mark_list على الشاشة.",
+          "answer": "",
+          "code": "mark_list = [48, 55, 74, 85, 63, 57, 91]\nprint(len(mark_list))"
+        },
+        {
+          "n": 6,
+          "id": 511022060,
+          "type": "description",
+          "prompt": "ستقوم بإنشاء برنامج يقوم بطباعة \"At least 85\" إذا كانت النتيجة 85 أو أعلى.\n\nأنشئ برنامجك على النحو التالي.\n(1) عبارة for تتكرر بعدد القيم في المتغير mark_list\n(2) في العملية المتكررة في (1)، إذا كانت قيمة المتغير mark_list تساوي 85 أو أعلى، فاطبع \"At least 85\" على الشاشة\n\nنسخ النص: At least 85",
+          "answer": "",
+          "code": "mark_list = [48, 55, 74, 85, 63, 57, 91]\nfor i in range(len(mark_list)):\n    if mark_list[i] >= 85:\n        print(\"At least 85\")"
+        }
+      ]
+    },
+    {
+      "n": 23,
+      "id": 511023,
+      "title": "جملة for والمصفوفة",
+      "test_type": "review",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511023010,
+          "type": "choice",
+          "prompt": "حدد نتيجة تشغيل البرنامج التالي.\n\nrank_list = [5, 7, 14, 11, 8, 6, 13]\nprint(rank_list[2])",
+          "answer": "14",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511023020,
+          "type": "choice",
+          "prompt": "حدد نتيجة تنفيذ البرنامج الآتي.\n\nsize_list = [8, 11, 14]\nfor i in range(3):\n    print(size_list[i])",
+          "answer": "8\n11\n14",
+          "code": ""
+        },
+        {
+          "n": 3,
+          "id": 511023030,
+          "type": "choice",
+          "prompt": "حدد نتيجة تنفيذ البرنامج الآتي.\n\ncount_list = [3, 4, 5]\nfor i in range(len(count_list)):\n    print(count_list[i])",
+          "answer": "3\n4\n5",
+          "code": ""
+        },
+        {
+          "n": 4,
+          "id": 511023040,
+          "type": "description",
+          "prompt": "ستقوم بإنشاء برنامج يقوم بطباعة جميع قيم المتغير point_list على الشاشة.\n\nأنشئ برنامجك على النحو التالي.\n(1) اكتب القائمة بعد in، واطبع جميع قيم المتغير point_list\nومع ذلك، يجب أن يكون المتغير الذي يخزن كل قيمة مأخوذة من المتغير point_list هو point.",
+          "answer": "",
+          "code": "point_list = [2, 5, 8, 11]\nfor point in point_list:\n    print(point)"
+        },
+        {
+          "n": 5,
+          "id": 511023050,
+          "type": "description",
+          "prompt": "ستقوم بإنشاء برنامج يقوم بطباعة جميع قيم المتغير word_list على الشاشة.\nالسلاسل المراد وضعها في word_list: Good morning, Good night, Hello\n\nأنشئ برنامجك على النحو التالي.\n(1) أضف قيمًا إلى المتغير word_list\n(2) اكتب القائمة بعد in، واطبع جميع قيم المتغير word_list\nومع ذلك، يجب أن يكون المتغير الذي يخزن كل قيمة مأخوذة من المتغير word_list هو word.\n\nنسخ النص: Good morning Good night Hello",
+          "answer": "",
+          "code": "word_list = [\"Good morning\", \"Good night\", \"Hello\"]\nfor word in word_list:\n    print(word)"
+        }
+      ]
+    },
+    {
+      "n": 24,
+      "id": 511024,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511024010,
+          "type": "choice",
+          "prompt": "حدد نتيجة تنفيذ البرنامج الآتي.\n\nsize_list = [8, 11, 14]\nfor i in range(3):\n    print(size_list[i])",
+          "answer": "8\n11\n14",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511024020,
+          "type": "description",
+          "prompt": "ستقوم بإنشاء برنامج يقوم بطباعة جميع قيم المتغير point_list على الشاشة.\n\nأنشئ البرنامج على النحو التالي.\n(1) اكتب القائمة بعد in واطبع جميع قيم المتغير point_list.\nاستخدم المتغير point للاحتفاظ بكل قيمة يتم إخراجها من المتغير point_list.",
+          "answer": "",
+          "code": "point_list = [2, 5, 8, 11]\nfor point in point_list:\n    print(point)"
+        },
+        {
+          "n": 3,
+          "id": 511024030,
+          "type": "description",
+          "prompt": "ستقوم بإنشاء برنامج يقوم بطباعة جميع قيم المتغير word_list على الشاشة.\nالسلاسل المراد وضعها في word_list: good morning, good night, hello\n\nأنشئ البرنامج على النحو التالي.\n(1) أضف قيمًا إلى المتغير word_list.\n(2) اكتب القائمة بعد in، واطبع جميع قيم المتغير word_list.\nاستخدم المتغير word للاحتفاظ بكل قيمة يتم إخراجها من المتغير word_list.\n\nنسخ النص: good morning good night hello",
+          "answer": "",
+          "code": "word_list = [\"good morning\", \"good night\", \"hello\"]\nfor word in word_list:\n    print(word)"
+        },
+        {
+          "n": 4,
+          "id": 511024040,
+          "type": "choice",
+          "prompt": "حدد ناتج البرنامج الآتي.\n\nA = 500\nB = 0\nif A >= 1:\n    B = B + 100\n    print(B)",
+          "answer": "100",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511024050,
+          "type": "choice",
+          "prompt": "حدد ناتج البرنامج الآتي.\n\nweather = \"sunny\"\nteam = \"Team Blue\"\nif weather == \"sunny\":\n    if team == \"Team Red\":\n        print(\"Destination is the park\")\n    else:\n        print(\"Destination is the amusement park\")\nelse:\n    print(\"Destination is the aquarium\")",
+          "answer": "Destination is the amusement park",
+          "code": ""
+        },
+        {
+          "n": 6,
+          "id": 511024060,
+          "type": "description",
+          "prompt": "ستقوم بإنشاء برنامج يقوم، في حالة هطول الأمطار، بتغيير الوجهة حسب وقت اليوم، وإلا فإنه يذهب في نزهة.\nإذا كان الجو ممطراً، فإن الوجهة هي دار السينما في الصباح، والمكتبة في الظهر، وإلا فالمنزل.\n\nاتبع الخطوات التالية لإكمال البرنامج.\n(1) قم بتفرع العملية بناءً على ما إذا كان المتغير weather ممطرًا أم لا.\n(2) قم بإنشاء البرنامج لحالة المطر.\n  - إذا كان المتغير time هو \"morning\"، اطبع \"Let's go to the movie theater\".\n  - إذا كان المتغير time هو \"noon\"، اطبع \"Let's go to the library\".\n  - وإلا، اطبع \"Let's stay home\".\n(3) إذا لم يكن المتغير weather ممطرًا، اطبع \"Let's go for a walk\".\n\nنسخ النص: Let's go to the movie theater Let's go to the library Let's stay home Let's go for a walk",
+          "answer": "",
+          "code": "weather = \"rainy\"\ntime = \"morning\"\nif weather == \"rainy\":\n    if time == \"morning\":\n        print(\"Let's go to the movie theater\")\n    elif time == \"noon\":\n        print(\"Let's go to the library\")\n    else:\n        print(\"Let's stay home\")\nelse:\n    print(\"Let's go for a walk\")"
+        }
+      ]
+    },
+    {
+      "n": 25,
+      "id": 511025,
+      "title": "مراجعة الفهم",
+      "test_type": "test",
+      "questions": [
+        {
+          "n": 1,
+          "id": 511025010,
+          "type": "choice",
+          "prompt": "اختر البرنامج الصحيح الذي يمرر الوسائط الثلاثة \"3\" و \"5\" و \"10\" إلى الدالة \"calculation3\" ويطبع النتيجة على الشاشة.",
+          "answer": "print(calculation3(3, 5, 10))",
+          "code": ""
+        },
+        {
+          "n": 2,
+          "id": 511025020,
+          "type": "description",
+          "prompt": "اكتب برنامجًا يمرر ثلاثة وسائط \"5\" و\"10\" و\"15\" إلى الدالة \"calculation3\"، ويطبع النتيجة على الشاشة.\n\nدون حذف البرنامج الأصلي، قم بإنشاء برنامجك فوق السطر print(num1).\n(1) أنشئ المتغير \"num1\" وأسند إليه نتيجة الدالة \"calculation3\"",
+          "answer": "",
+          "code": "def calculation3(a, b, c):\n    result = a * b * c\n    return result\nnum1 = calculation3(5, 10, 15)\nprint(num1)"
+        },
+        {
+          "n": 3,
+          "id": 511025030,
+          "type": "description",
+          "prompt": "اكتب برنامجًا يمرر ثلاثة وسائط \"4\" و\"4\" و\"4\" إلى الدالة \"calculation3\"، ويطبع النتيجة على الشاشة.\n\nدون حذف البرنامج الأصلي، أنشئ برنامجك من السطر 6 فصاعدًا.\n(1) أنشئ المتغير \"num2\" وأسند إليه نتيجة الدالة \"calculation3\" بعد تمرير الوسائط \"4\" و\"4\" و\"4\" إليها",
+          "answer": "",
+          "code": "def calculation3(a, b, c):\n    result = a * b * c\n    return result\nnum1 = calculation3(5, 10, 15)\nprint(num1)\nnum2 = calculation3(4, 4, 4)\nprint(num2)"
+        },
+        {
+          "n": 4,
+          "id": 511025040,
+          "type": "choice",
+          "prompt": "تقوم الدالة min بإرجاع أصغر قيمة بين وسائطها.\nاختر البرنامج الذي يطبع أصغر قيمة بين num1 و num2 و num3.",
+          "answer": "print(min(num1, num2, num3))",
+          "code": ""
+        },
+        {
+          "n": 5,
+          "id": 511025050,
+          "type": "choice",
+          "prompt": "حدد ناتج البرنامج الآتي.\n\nscore_list = [70, 80, 66, 88, 92]\nfor score in score_list:\n    if score >= 80:\n        print(score)",
+          "answer": "80\n88\n92",
+          "code": ""
+        },
+        {
+          "n": 6,
+          "id": 511025060,
+          "type": "description",
+          "prompt": "اكتب برنامجًا يطبع فقط قيم المتغير score التي تساوي 80 أو أعلى.\nلا تقم بحذف البرنامج الأصلي.",
+          "answer": "",
+          "code": "score_list = [70, 80, 66, 88, 92]\nfor score in score_list:\n    if score >= 80:\n        print(score)"
+        },
+        {
+          "n": 7,
+          "id": 511025070,
+          "type": "choice",
+          "prompt": "يُستخدم المخطط الانسيابي أدناه لتحديد ما إذا كان الشخص يستطيع ركوب الأفعوانية أم لا.\nمن بين الخيارات أدناه، اختر العبارة الصحيحة بناءً على ما يمكن استنتاجه من هذا المخطط الانسيابي.\n\n",
+          "answer": "إذا كان عمرك 12 سنة أو أكثر وكان طولك 140 سم أو أكثر، يمكنك الركوب بمفردك.",
+          "code": ""
+        }
+      ]
+    }
+  ]
+}
