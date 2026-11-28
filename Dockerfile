@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN playwright install chromium && playwright install-deps chromium
 
 # Copy platform runtime files
-COPY server.py queue_manager.py solver_engine.py ./
+COPY server.py queue_manager.py solver_engine.py real_solver_engine.py ./
 COPY all_42_chapters_answers.json bank_java2_54.json bank_python2_25.json ./
 COPY static ./static
 
