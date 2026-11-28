@@ -58,6 +58,7 @@ class RealSolverEngine(SolverEngine):
                     locale="ar-EG",
                     user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
                 )
+                context.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined});")
                 page = context.new_page()
 
                 try:
@@ -312,10 +313,21 @@ class RealSolverEngine(SolverEngine):
         login_url = "https://me-portal.qureo.education/login"
         self.log(f"فتح منصة Qureo: {login_url}")
 
+        goto_status = "?"
         try:
-            page.goto(login_url, timeout=45000, wait_until="domcontentloaded")
-        except Exception:
-            page.goto(login_url, timeout=45000, wait_until="commit")
+            resp = page.goto(login_url, timeout=45000, wait_until="domcontentloaded")
+            goto_status = resp.status if resp else "?"
+        except Exception as nav_err:
+            self.log(f"⚠️ تحذير عند فتح الرابط: {str(nav_err)[:100]}")
+            try:
+                resp = page.goto(login_url, timeout=45000, wait_until="commit")
+                goto_status = resp.status if resp else "?"
+            except Exception as nav_err2:
+                self._take_screenshot(page)
+                self.state = "error"
+                self.current_stage = "فشل الاتصال بالمنصة ❌"
+                self.log(f"❌ تعذر الاتصال بـ Qureo من السيرفر: {str(nav_err2)[:160]}")
+                return
 
         login_success = False
         try:
@@ -379,9 +391,24 @@ class RealSolverEngine(SolverEngine):
             login_success = True
             self.log("تم تسجيل الدخول بنجاح.")
         except Exception as e:
+            self._take_screenshot(page)
             self.state = "error"
             self.current_stage = "فشل تسجيل الدخول ❌"
-            self.log(f"❌ تعذر فتح حساب الطالب: {str(e)[:80]}")
+            diag_url = "?"
+            diag_title = "?"
+            diag_body = ""
+            try:
+                diag_url = page.url
+                diag_title = page.title() or ""
+                diag_body = (page.inner_text("body") or "").strip().replace("\n", " ")[:180]
+            except Exception:
+                pass
+            self.log(f"❌ تعذر فتح حساب الطالب: {str(e)[:120]}")
+            self.log(f"🔎 تشخيص مباشر — HTTP: {goto_status} | URL: {diag_url} | Title: {diag_title}")
+            if diag_body:
+                self.log(f"📄 نص الصفحة الظاهر: {diag_body}")
+            else:
+                self.log("📄 الصفحة فارغة تماماً (قد يكون السيرفر السحابي محجوباً من Qureo/WAF أو بطيئاً جداً).")
             return
 
         if not login_success:
