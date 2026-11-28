@@ -15,6 +15,30 @@ class RealSolverEngine(SolverEngine):
     lectures and solving chapter tests. Supports re-grading already-completed accounts.
     """
 
+    def _build_browser_launch(self, playwright, headless=True):
+        import platform
+        is_windows = platform.system() == "Windows"
+        launch_args = ["--disable-blink-features=AutomationControlled"]
+        if is_windows:
+            launch_args.append("--start-maximized")
+            return playwright.chromium.launch(
+                channel="chrome",
+                headless=headless,
+                args=launch_args,
+            )
+        launch_args.extend([
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--disable-extensions",
+            "--js-flags=--max-old-space-size=256",
+        ])
+        return playwright.chromium.launch(
+            headless=True,
+            args=launch_args,
+        )
+
     def run_blocking(
         self,
         username,
@@ -314,6 +338,13 @@ class RealSolverEngine(SolverEngine):
         self.log(f"فتح منصة Qureo: {login_url}")
 
         goto_status = "?"
+        net_errors = []
+        js_errors = []
+        page.on("requestfailed", lambda req: net_errors.append(f"FAIL {req.url[:70]}: {req.failure}") if len(net_errors) < 5 else None)
+        page.on("response", lambda res: net_errors.append(f"HTTP {res.status} {res.url[:70]}") if res.status >= 400 and len(net_errors) < 5 else None)
+        page.on("pageerror", lambda err: js_errors.append(str(err)[:100]) if len(js_errors) < 5 else None)
+        page.on("console", lambda msg: js_errors.append(msg.text[:100]) if msg.type == "error" and len(js_errors) < 5 else None)
+
         try:
             resp = page.goto(login_url, timeout=45000, wait_until="domcontentloaded")
             goto_status = resp.status if resp else "?"
@@ -405,6 +436,10 @@ class RealSolverEngine(SolverEngine):
                 pass
             self.log(f"❌ تعذر فتح حساب الطالب: {str(e)[:120]}")
             self.log(f"🔎 تشخيص مباشر — HTTP: {goto_status} | URL: {diag_url} | Title: {diag_title}")
+            if net_errors:
+                self.log("🌐 أخطاء الشبكة: " + " | ".join(net_errors))
+            if js_errors:
+                self.log("⚙️ أخطاء المتصفح/JS: " + " | ".join(js_errors))
             if diag_body:
                 self.log(f"📄 نص الصفحة الظاهر: {diag_body}")
             else:
