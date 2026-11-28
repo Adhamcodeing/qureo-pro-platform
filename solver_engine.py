@@ -6,6 +6,7 @@ import threading
 import datetime
 import re
 import platform
+import random
 from playwright.sync_api import sync_playwright
 
 class SolverEngine:
@@ -38,6 +39,9 @@ class SolverEngine:
         self.progress_done = 0
         self.progress_total = 0
         self.screenshot_bytes = None
+        self.proof_course_bytes = None
+        self.proof_section_bytes = None
+        self.proof_stats = None
         self.thread = None
         self.stop_requested = False
 
@@ -122,7 +126,7 @@ class SolverEngine:
             return self.chapters_bank, "java1"
         return self.get_bank_for_subject(subject), subject
 
-    def start(self, username, password, subject="java1", headless=True, mode="single", target_chapter=None, chapter_from=None, chapter_to=None):
+    def start(self, username, password, subject="java1", headless=True, mode="single", target_chapter=None, chapter_from=None, chapter_to=None, natural_mode=False):
         if self.running:
             return False, "الجلسة تعمل بالفعل"
 
@@ -138,13 +142,13 @@ class SolverEngine:
 
         self.thread = threading.Thread(
             target=self._run_session,
-            args=(username, password, subject, headless, mode, target_chapter, chapter_from, chapter_to),
+            args=(username, password, subject, headless, mode, target_chapter, chapter_from, chapter_to, natural_mode),
             daemon=True
         )
         self.thread.start()
         return True, "تم بدء الجلسة بنجاح"
 
-    def run_blocking(self, username, password, subject="java1", headless=True, mode="single", target_chapter=None, chapter_from=None, chapter_to=None):
+    def run_blocking(self, username, password, subject="java1", headless=True, mode="single", target_chapter=None, chapter_from=None, chapter_to=None, natural_mode=False):
         """Run a session synchronously in the caller thread (used by sequential QueueManager)."""
         self.running = True
         self.stop_requested = False
@@ -155,7 +159,7 @@ class SolverEngine:
         self.progress_done = 0
         self.progress_total = 0
         self.current_stage = "جاري بدء المتصفح الخفي..."
-        self._run_session(username, password, subject, headless, mode, target_chapter, chapter_from, chapter_to)
+        self._run_session(username, password, subject, headless, mode, target_chapter, chapter_from, chapter_to, natural_mode)
 
     def stop(self):
         if not self.running:
@@ -173,7 +177,7 @@ class SolverEngine:
         except Exception:
             pass
 
-    def _run_session(self, username, password, subject, headless, mode="single", target_chapter=None, chapter_from=None, chapter_to=None):
+    def _run_session(self, username, password, subject, headless, mode="single", target_chapter=None, chapter_from=None, chapter_to=None, natural_mode=False):
         playwright = None
         browser = None
         try:
@@ -182,8 +186,12 @@ class SolverEngine:
                 mode_label = "فصل واحد فقط"
             elif mode == "range":
                 mode_label = f"نطاق محدد ({chapter_from or 1} ⬅ {chapter_to or 'الأخير'})"
+            elif mode == "boost_low":
+                mode_label = "تقوية الدرجات الناقصة (<5)"
             else:
                 mode_label = "حل المنهج بالكامل"
+            if natural_mode and mode != "boost_low":
+                mode_label += " • وضع طبيعي (4-5/5)"
             self.log(f"محرك Qureo — المادة: {subj_label} • نمط: {mode_label}.")
             
             playwright = sync_playwright().start()
@@ -223,7 +231,8 @@ class SolverEngine:
                 self._solve_qureo(
                     page, username, password, subject,
                     mode=mode, target_chapter=target_chapter,
-                    chapter_from=chapter_from, chapter_to=chapter_to
+                    chapter_from=chapter_from, chapter_to=chapter_to,
+                    natural_mode=natural_mode
                 )
 
             if not self.stop_requested and self.state != "error":
@@ -251,7 +260,7 @@ class SolverEngine:
             except Exception:
                 pass
 
-    def _solve_qureo(self, page, username, password, subject, mode="single", target_chapter=None, chapter_from=None, chapter_to=None):
+    def _solve_qureo(self, page, username, password, subject, mode="single", target_chapter=None, chapter_from=None, chapter_to=None, natural_mode=False):
         self.state = "running"
         login_url = "https://me-portal.qureo.education/login"
         self.log(f"فتح منصة Qureo: {login_url}")
@@ -460,6 +469,18 @@ class SolverEngine:
             )
             self.progress_done = done_in_range
             self.log(f"🔢 نمط النطاق المحدد مفعل: من الفصل {c_from} إلى الفصل {c_to} ({len(chapters_to_solve)} فصلاً).")
+        elif mode == "boost_low":
+            for idx, ch in enumerate(chapters_list, 1):
+                ch_id = ch["id"]
+                if ch_id in completed_set and diamonds_map.get(ch_id, 0) < 5:
+                    chapters_to_solve.append((idx, ch))
+            if not chapters_to_solve:
+                self.log("🎉 جميع الفصول المحلولة عند الطالب حاصلة بالفعل على 5/5 (PERFECT)!")
+                self.current_stage = "لا توجد درجات ناقصة للتحسين ✓"
+                return
+            self.progress_total = len(chapters_to_solve)
+            self.progress_done = 0
+            self.log(f"💎 نمط تقوية الناقص مفعل: تم رصد {len(chapters_to_solve)} فصلاً درجتها أقل من 5/5 لتحسينها.")
         else:
             for idx, ch in enumerate(chapters_list, 1):
                 chapters_to_solve.append((idx, ch))
@@ -489,7 +510,10 @@ class SolverEngine:
 
             bank_ch = active_bank.get(idx, {})
             bank_questions = bank_ch.get("questions", [])
-            solve_result = self._solve_qureo_chapter(page, ch_id, test_type, bank_questions)
+            allow_imperfect = bool(natural_mode and mode != "boost_low" and random.random() < 0.35)
+            if allow_imperfect:
+                self.log(f"🎯 وضع الحل الطبيعي: استهداف درجة ~4/5 في الفصل {idx} ليبدو الحل بشرياً.")
+            solve_result = self._solve_qureo_chapter(page, ch_id, test_type, bank_questions, allow_imperfect=allow_imperfect)
 
             # Auto-recover once if Qureo reports prev_chapter_not_completed
             if isinstance(solve_result, dict) and not solve_result.get("ok") and solve_result.get("needPrevChapter") and idx > 1:
@@ -544,9 +568,48 @@ class SolverEngine:
                 break
 
         try:
-            page.goto(f"https://me-tp.qureo.education/section/{section_id}")
-            time.sleep(1)
+            page.goto(f"https://me-tp.qureo.education/section/{section_id}", wait_until="networkidle", timeout=15000)
+            time.sleep(0.8)
             self._take_screenshot(page)
+            self.proof_section_bytes = page.screenshot(type="png")
+        except Exception:
+            try:
+                page.goto(f"https://me-tp.qureo.education/section/{section_id}")
+                time.sleep(1)
+                self._take_screenshot(page)
+                self.proof_section_bytes = page.screenshot(type="png")
+            except Exception:
+                pass
+
+        try:
+            live_stats = page.evaluate("""async ({section_id, course_code, total_chapters}) => {
+                try {
+                    const res = await fetch(`/api/study/students/sections/${section_id}/chapters`);
+                    if (!res.ok) return null;
+                    const arr = await res.json();
+                    let completed = 0;
+                    let diamonds = 0;
+                    for (const c of (arr || [])) {
+                        if (c.completed_at) completed++;
+                        diamonds += (c.diamond || 0);
+                    }
+                    return {
+                        completed_chapters: completed,
+                        total_chapters: total_chapters,
+                        earned_diamonds: diamonds,
+                        max_diamonds: total_chapters * 5,
+                        course_code: course_code,
+                        section_id: section_id
+                    };
+                } catch(e) { return null; }
+            }""", {"section_id": section_id, "course_code": course_code, "total_chapters": total_chapters})
+            if live_stats:
+                live_stats["username"] = username
+                live_stats["verified_at"] = datetime.datetime.now().strftime("%H:%M:%S")
+                self.proof_stats = live_stats
+            page.goto(f"https://me-tp.qureo.education/course/{course_code}", wait_until="networkidle", timeout=15000)
+            time.sleep(0.8)
+            self.proof_course_bytes = page.screenshot(type="png")
         except Exception:
             pass
 
@@ -576,6 +639,13 @@ class SolverEngine:
                     self.log(f"تم الوصول إلى {range_done}/{range_total} فصلاً في النطاق {c_from}-{c_to}.")
                 if newly_solved > 0:
                     self.log(f"تم حل وتثبيت {newly_solved} فصلاً جديداً رسمياً على سيرفر Qureo!")
+            elif mode == "boost_low":
+                boosted = sum(
+                    1 for _, ch in chapters_to_solve
+                    if diamonds_map.get(ch["id"], 0) >= 5
+                )
+                self.current_stage = f"اكتمل تحسين {boosted}/{len(chapters_to_solve)} فصلاً ✓"
+                self.log(f"🎉 تم رفع {boosted}/{len(chapters_to_solve)} فصلاً من الدرجات الناقصة إلى 5/5 بنجاح!")
             else:
                 if solved_count == total_chapters and self.state != "error":
                     self.current_stage = "اكتملت جميع الفصول بنجاح ✓"
@@ -587,10 +657,10 @@ class SolverEngine:
                 if newly_solved > 0:
                     self.log(f"تم حل وتثبيت {newly_solved} فصلاً جديداً رسمياً على سيرفر Qureo!")
 
-    def _solve_qureo_chapter(self, page, ch_id, test_type, bank_questions):
+    def _solve_qureo_chapter(self, page, ch_id, test_type, bank_questions, allow_imperfect=False):
         """Complete lectures, fetch questions, submit matched answers, and verify score inside browser."""
         return page.evaluate(r"""
-            async ({ch_id, test_type, bank_questions}) => {
+            async ({ch_id, test_type, bank_questions, allow_imperfect}) => {
                 const logs = [];
                 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -808,23 +878,33 @@ class SolverEngine:
 
                     // 4. Submit each question's answer
                     let lastComplete = null;
+                    let wrongPickIdx = -1;
+                    if (allow_imperfect && qList.length >= 2) {
+                        const choiceIdx = qList.findIndex(it => it.question && it.question.type === 'choice' && Array.isArray(it.choices) && it.choices.length > 1);
+                        wrongPickIdx = choiceIdx >= 0 ? choiceIdx : (qList.length - 1);
+                    }
                     for (let i = 0; i < qList.length; i++) {
                         const item = qList[i];
                         const q = item.question;
                         const qType = q.type;
                         const bankQ = bank_questions[i] || {};
+                        const makeWrong = (i === wrongPickIdx);
 
                         let endpoint = '';
                         let body = {};
 
                         if (qType === 'choice') {
                             const bestChoice = pickBestChoice(item.choices, bankQ.answer || '');
+                            let chosen = bestChoice;
+                            if (makeWrong && Array.isArray(item.choices) && item.choices.length > 1) {
+                                chosen = item.choices.find(c => c.id !== bestChoice.id) || bestChoice;
+                            }
                             endpoint = realTestType === 'review'
                                 ? `/api/study/students/review-questions/${q.id}/answer/choice`
                                 : `/api/study/students/test-questions/${q.id}/answer/choice`;
-                            body = {choice_id: bestChoice.id};
+                            body = {choice_id: chosen.id};
                         } else {
-                            const code = bankQ.code || bankQ.answer || '';
+                            const code = makeWrong ? "// review" : (bankQ.code || bankQ.answer || '');
                             endpoint = realTestType === 'review'
                                 ? `/api/study/students/review-questions/${q.id}/answer/description`
                                 : `/api/study/students/test-questions/${q.id}/answer/description`;
@@ -925,7 +1005,8 @@ class SolverEngine:
         """, {
             "ch_id": ch_id,
             "test_type": test_type,
-            "bank_questions": bank_questions
+            "bank_questions": bank_questions,
+            "allow_imperfect": bool(allow_imperfect)
         })
 
     def _solve_spx(self, page, username, password, subject):
@@ -979,3 +1060,264 @@ class SolverEngine:
 
         if not self.stop_requested:
             self.log("تم إنهاء جميع موضوعات الثقافة المالية بنجاح ✓")
+
+    @staticmethod
+    def _build_browser_launch(playwright, headless=True):
+        is_windows = platform.system() == "Windows"
+        launch_args = ["--disable-blink-features=AutomationControlled"]
+        if is_windows:
+            if not headless:
+                launch_args.append("--start-maximized")
+            return playwright.chromium.launch(
+                channel="chrome",
+                headless=headless,
+                args=launch_args,
+            )
+        launch_args.extend([
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--no-zygote",
+        ])
+        return playwright.chromium.launch(
+            headless=True,
+            args=launch_args,
+        )
+
+    @staticmethod
+    def _login_qureo_readonly(page, username, password, subject="auto_js"):
+        """Log into Qureo in read-only mode and return (ok, info_or_error)."""
+        login_url = "https://me-portal.qureo.education/login"
+        try:
+            page.goto(login_url, timeout=30000, wait_until="networkidle")
+        except Exception:
+            page.goto(login_url, timeout=30000, wait_until="domcontentloaded")
+        time.sleep(0.8)
+
+        try:
+            sec_btn = page.query_selector(".portal-selection-button-secondary, button:has-text('Learning Login')")
+            if sec_btn:
+                sec_btn.click()
+                time.sleep(0.8)
+        except Exception:
+            pass
+
+        page.wait_for_selector("#student_id, input[type=text]", timeout=12000)
+        page.fill("#student_id, input[type=text]", username)
+        page.fill("#password, input[type=password]", password)
+        btn = page.query_selector("button[type=submit], button.login-button, button:has-text('Login'), button:has-text('دخول')")
+        if btn:
+            btn.click()
+        else:
+            page.press("#password", "Enter")
+
+        deadline = time.time() + 18
+        portal_cards_found = False
+        while time.time() < deadline:
+            try:
+                if "me-tp.qureo.education" in page.url:
+                    break
+                err_el = page.query_selector(":has-text('incorrect'), :has-text('غير صحيحة'), :has-text('غير صحيح'), .error-message")
+                if err_el and err_el.is_visible():
+                    err_text = err_el.inner_text().strip()
+                    if any(x in err_text.lower() for x in ["incorrect", "غير صحيح", "error"]):
+                        return False, f"فشل تسجيل الدخول: {err_text}"
+                if page.query_selector(".course-card"):
+                    portal_cards_found = True
+                    break
+            except Exception:
+                if "me-tp.qureo.education" in page.url:
+                    break
+            time.sleep(0.35)
+
+        if portal_cards_found and "me-tp.qureo.education" not in page.url:
+            want_python = (subject == "python2")
+            card_sel = ".course-card.python, .course-card:has-text('Python')" if want_python else ".course-card.purple, .course-card:has-text('JavaScript')"
+            card_el = page.query_selector(card_sel)
+            if not card_el:
+                return False, "المسار المطلوب غير متاح في حساب الطالب"
+            card_el.click()
+            page.wait_for_url("**me-tp.qureo.education/**", timeout=20000)
+        elif "me-tp.qureo.education" not in page.url:
+            page.wait_for_url("**/course/**", timeout=15000)
+
+        time.sleep(0.8)
+        stats = page.evaluate("""async () => {
+            try {
+                const me = await (await fetch('/api/study/students/me')).json();
+                const courseCode = (me && me.course_code) || 'javascript_ar';
+                const courseRes = await (await fetch(`/api/study/courses/${courseCode}`)).json();
+                const sectionId = (courseRes && courseRes.basic_section) ? (courseRes.basic_section.id || 5) : 5;
+                const secRes = await (await fetch(`/api/study/sections/${sectionId}`)).json();
+                const chList = (secRes && secRes.chapters) || [];
+                const stRes = await fetch(`/api/study/students/sections/${sectionId}/chapters`);
+                const cJson = stRes.ok ? await stRes.json() : [];
+                const stList = Array.isArray(cJson) ? cJson : (cJson.student_chapters || []);
+                let completed = 0;
+                let diamonds = 0;
+                let lowDiamonds = 0;
+                for (const s of stList) {
+                    if (s.completed_at || (s.diamond !== undefined && s.diamond > 0)) {
+                        completed++;
+                        if ((s.diamond || 0) < 5) lowDiamonds++;
+                    }
+                    diamonds += (s.diamond || 0);
+                }
+                const total = chList.length || stList.length || 0;
+                let detectedGrade = 'جافا';
+                if (courseCode.includes('python')) detectedGrade = 'تانية ثانوي — بايثون (25 فصلاً)';
+                else if (total > 42) detectedGrade = `تانية ثانوي — جافا (${total} فصلاً)`;
+                else detectedGrade = `أولى ثانوي — جافا (${total} فصلاً)`;
+                return {
+                    ok: true,
+                    course_code: courseCode,
+                    section_id: sectionId,
+                    completed_chapters: completed,
+                    total_chapters: total,
+                    earned_diamonds: diamonds,
+                    max_diamonds: total * 5,
+                    low_diamond_chapters: lowDiamonds,
+                    detected_grade: detectedGrade
+                };
+            } catch(e) {
+                return {ok: false, error: e.toString()};
+            }
+        }""")
+        if not stats or not stats.get("ok"):
+            return False, (stats or {}).get("error", "تعذر قراءة بيانات الحساب من Qureo")
+
+        stats["username"] = username
+        stats["verified_at"] = datetime.datetime.now().strftime("%H:%M:%S")
+        return True, stats
+
+    @staticmethod
+    def check_qureo_account(username, password, subject="auto_js"):
+        """Fast read-only account check returning grade, completed chapters, and diamonds."""
+        playwright = None
+        browser = None
+        try:
+            playwright = sync_playwright().start()
+            browser = SolverEngine._build_browser_launch(playwright, headless=True)
+            context = browser.new_context(
+                viewport={"width": 1280, "height": 800},
+                locale="ar-EG",
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            )
+            page = context.new_page()
+            ok, res = SolverEngine._login_qureo_readonly(page, username, password, subject=subject)
+            if not ok:
+                return {"ok": False, "error": res}
+            return {"ok": True, "stats": res}
+        except Exception as e:
+            return {"ok": False, "error": f"تعذر فحص الحساب: {e}"}
+        finally:
+            try:
+                if browser:
+                    browser.close()
+            except Exception:
+                pass
+            try:
+                if playwright:
+                    playwright.stop()
+            except Exception:
+                pass
+
+    @staticmethod
+    def capture_qureo_proof(username, password, subject="auto_js"):
+        """Standalone read-only Qureo login to capture live proof screenshots and stats."""
+        playwright = None
+        browser = None
+        try:
+            playwright = sync_playwright().start()
+            browser = SolverEngine._build_browser_launch(playwright, headless=True)
+            context = browser.new_context(
+                viewport={"width": 1280, "height": 800},
+                locale="ar-EG",
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            )
+            page = context.new_page()
+            ok, res = SolverEngine._login_qureo_readonly(page, username, password, subject=subject)
+            if not ok:
+                return {"ok": False, "error": res}
+
+            course_code = res["course_code"]
+            section_id = res["section_id"]
+            try:
+                page.goto(f"https://me-tp.qureo.education/course/{course_code}", wait_until="networkidle", timeout=15000)
+            except Exception:
+                page.goto(f"https://me-tp.qureo.education/course/{course_code}", timeout=15000)
+            time.sleep(0.8)
+            course_bytes = page.screenshot(type="png")
+
+            try:
+                page.goto(f"https://me-tp.qureo.education/section/{section_id}", wait_until="networkidle", timeout=15000)
+            except Exception:
+                page.goto(f"https://me-tp.qureo.education/section/{section_id}", timeout=15000)
+            time.sleep(0.8)
+            section_bytes = page.screenshot(type="png")
+
+            return {
+                "ok": True,
+                "stats": res,
+                "course_bytes": course_bytes,
+                "section_bytes": section_bytes,
+            }
+        except Exception as e:
+            return {"ok": False, "error": f"تعذر فتح إثبات الحل: {e}"}
+        finally:
+            try:
+                if browser:
+                    browser.close()
+            except Exception:
+                pass
+            try:
+                if playwright:
+                    playwright.stop()
+            except Exception:
+                pass
+
+    @staticmethod
+    def open_live_qureo_browser(username, password, subject="auto_js"):
+        """Launch a visible Chrome browser signed into Qureo on local Windows."""
+        if platform.system() != "Windows":
+            return False, "فتح نافذة Chrome متاح فقط عند تشغيل الأداة على جهازك الشخصي، استخدم معاينة إثبات الحل هنا."
+
+        def _runner():
+            playwright = None
+            browser = None
+            try:
+                playwright = sync_playwright().start()
+                browser = playwright.chromium.launch(
+                    channel="chrome",
+                    headless=False,
+                    args=["--disable-blink-features=AutomationControlled", "--start-maximized"],
+                )
+                context = browser.new_context(
+                    no_viewport=True,
+                    locale="ar-EG",
+                    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+                )
+                page = context.new_page()
+                ok, res = SolverEngine._login_qureo_readonly(page, username, password, subject=subject)
+                if ok and isinstance(res, dict) and res.get("course_code"):
+                    page.goto(f"https://me-tp.qureo.education/course/{res['course_code']}", timeout=15000)
+                while browser.is_connected() and len(context.pages) > 0:
+                    time.sleep(0.5)
+            except Exception as e:
+                print(f"[ProofBrowser] {e}")
+            finally:
+                try:
+                    if browser:
+                        browser.close()
+                except Exception:
+                    pass
+                try:
+                    if playwright:
+                        playwright.stop()
+                except Exception:
+                    pass
+
+        t = threading.Thread(target=_runner, daemon=True)
+        t.start()
+        return True, "تم فتح متصفح Chrome مسجلاً بحساب الطالب على جهازك."

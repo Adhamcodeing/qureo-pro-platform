@@ -3,315 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة Qureo Pro | الحل الذكي والطابور المتسلسل</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%236366f1'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='38' font-family='Arial' font-weight='bold'>Q</text></svg>">
+    <title>Qureo Pro | الحل الحقيقي المتكامل</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%2310b981'/><stop offset='100%' stop-color='%236366f1'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='url(%23g)'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='36' font-family='Arial' font-weight='bold'>Q</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="bg-orb bg-orb-1"></div>
-    <div class="bg-orb bg-orb-2"></div>
-    <div class="bg-grid"></div>
+    <div class="ambient-bg">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
 
-    <div class="container">
-        <!-- Top Command Header -->
-        <header class="glass-header">
-            <div class="brand">
-                <div class="brand-logo">Q</div>
+    <div class="app-shell">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="brand-wrap">
+                <div class="brand-icon">Q</div>
                 <div>
-                    <h1>منصة <span class="gradient-text">Qureo Pro</span> الذكية</h1>
-                    <p>دمج أولى وتانية ثانوي تلقائياً • جدول طلاب سريع • طابور متسلسل مضمون</p>
+                    <div class="brand-title">
+                        <span>منصة <span class="brand-accent">Qureo Pro</span></span>
+                        <span class="version-chip">المحرك الحقيقي 100%</span>
+                    </div>
+                    <p class="brand-sub">كتابة الأكواد الفعلية + الاختيارات + المربعات الجزئية + الاختبار النهائي بدفعات ضخمة</p>
                 </div>
             </div>
 
-            <div class="header-metrics">
-                <div class="metric-pill metric-active" id="hdrActivePill">
-                    <span class="pulse-dot idle" id="hdrActiveDot"></span>
-                    <span>النشط:</span>
+            <div class="topbar-stats">
+                <div class="stat-chip active-chip">
+                    <span class="status-dot idle" id="hdrActiveDot"></span>
+                    <span class="stat-label">النشط:</span>
                     <strong id="hdrActiveName">جاهز</strong>
                 </div>
-                <div class="metric-pill">
-                    <span>⏳ في الانتظار:</span>
+                <div class="stat-chip">
+                    <span class="stat-label">⏳ انتظار</span>
                     <strong id="hdrQueuedCount">0</strong>
                 </div>
-                <div class="metric-pill">
-                    <span>✅ مكتمل:</span>
+                <div class="stat-chip success">
+                    <span class="stat-label">✅ مكتمل</span>
                     <strong id="hdrDoneCount">0</strong>
                 </div>
-                <label class="headless-pill" title="تشغيل المتصفح في الخلفية بدون فتح نافذة مرئية">
+                <div class="stat-chip danger" id="hdrErrChip" style="display:none;">
+                    <span class="stat-label">❌ أخطاء</span>
+                    <strong id="hdrErrCount">0</strong>
+                </div>
+                <label class="toggle-pill" title="تشغيل المتصفح في الخلفية">
                     <input type="checkbox" id="headlessCheck" checked>
-                    <span class="switch-track"></span>
+                    <span class="toggle-slider"></span>
                     <span>تشغيل خفي</span>
                 </label>
             </div>
         </header>
 
-        <main class="main-layout">
-            <!-- Right Column (RTL): Student / Batch Entry & Controls -->
-            <section class="panel glass-card entry-card">
-                <div class="entry-tabs" role="tablist">
-                    <button type="button" class="entry-tab active" data-tab="single" id="tabSingle">
+        <!-- Batch Overall Progress Strip (shown when queue has items) -->
+        <section class="batch-strip" id="batchStrip" style="display:none;">
+            <div class="batch-strip-info">
+                <span id="batchStripText">تقدم الدفعة الكلية: 0 / 0 طالب</span>
+                <span id="batchStripPct" class="mono">0%</span>
+            </div>
+            <div class="batch-progress-track">
+                <div class="batch-progress-fill" id="batchProgressFill" style="width:0%"></div>
+            </div>
+        </section>
+
+        <!-- Main Workspace -->
+        <main class="workspace-grid">
+            <!-- Right Panel: Input & Controls -->
+            <section class="card entry-panel">
+                <div class="segmented-tabs" role="tablist">
+                    <button type="button" class="seg-tab active" id="tabSingle" data-tab="single">
                         <span>👤</span>
                         <span>طالب واحد</span>
                     </button>
-                    <button type="button" class="entry-tab" data-tab="bulk" id="tabBulk">
+                    <button type="button" class="seg-tab" id="tabBulk" data-tab="bulk">
                         <span>👥</span>
-                        <span>حسابات متعددة (1ث + 2ث)</span>
+                        <span>حسابات متعددة</span>
                     </button>
                 </div>
 
-                <form id="queueForm" novalidate>
-                    <!-- Single Student Panel -->
-                    <div id="panelSingle">
-                        <div class="form-group">
-                            <label for="singleLabel">اسم الطالب <span class="hint">(اختياري لتمييزه في الطابور)</span></label>
-                            <input type="text" id="singleLabel" placeholder="مثال: أحمد محمود — أولى ثانوي">
-                        </div>
-
-                        <div class="form-row-2">
-                            <div class="form-group">
-                                <label for="username">كود الطالب</label>
-                                <input type="text" id="username" placeholder="475441535" dir="ltr">
+                <form id="realQueueForm" novalidate>
+                    <!-- Single Student -->
+                    <div id="singlePanel" class="tab-content active">
+                        <div class="fields-row">
+                            <div class="field-box">
+                                <label>كود الطالب</label>
+                                <input type="text" id="usernameInput" placeholder="477920943" dir="ltr" autocomplete="off">
                             </div>
-                            <div class="form-group">
-                                <label for="password">كلمة المرور</label>
-                                <div class="pw-wrap">
-                                    <input type="password" id="password" placeholder="••••••••" dir="ltr">
-                                    <button type="button" class="pw-toggle" id="btnTogglePw" title="إظهار / إخفاء كلمة المرور">👁</button>
-                                </div>
+                            <div class="field-box">
+                                <label>كلمة المرور</label>
+                                <input type="text" id="passwordInput" placeholder="••••••••" dir="ltr" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="fields-row">
+                            <div class="field-box">
+                                <label>اسم الطالب (اختياري)</label>
+                                <input type="text" id="labelInput" placeholder="مثال: أدهم علي">
+                            </div>
+                            <div class="field-box">
+                                <label>الصف / المسار</label>
+                                <select id="subjectSelect">
+                                    <option value="auto_js">تلقائي جافا (1ث / 2ث)</option>
+                                    <option value="java1">أولى ثانوي — جافا (42)</option>
+                                    <option value="java2">تانية ثانوي — جافا (54)</option>
+                                    <option value="python2">تانية ثانوي — بايثون (25)</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Multi-Account Easy Table Builder Panel -->
-                    <div id="panelBulk" class="hidden">
-                        <div class="bulk-toolbar">
-                            <div class="bulk-toolbar-title">
-                                <span>📋 جدول إضافة الطلاب السريع</span>
-                                <small>اكتب واضغط Enter للصف التالي — تقدر تخلط أولى وتانية وبايثون مع بعض</small>
+                    <!-- Bulk Panel -->
+                    <div id="bulkPanel" class="tab-content" style="display:none;">
+                        <div class="field-box">
+                            <div class="label-row">
+                                <label>قائمة الطلاب (لصق من واتساب أو إكسل — حتى مئات الحسابات)</label>
+                                <span class="badge-count" id="liveLineCount">0 سطر</span>
                             </div>
-                            <div class="bulk-toolbar-actions">
-                                <button type="button" class="btn-mini btn-accent-soft" id="btnTogglePaste">
-                                    ✨ لصق سريع من نص / واتساب
+                            <textarea id="smartPasteInput" rows="6" placeholder="الصق هنا بأي تنسيق، مثال:&#10;أحمد 477920943 D?mcpAw6&#10;يوسف | 470819199 | Xfi7?T3h | بايثون&#10;475441535:Pass123" dir="auto"></textarea>
+                        </div>
+                        <div class="fields-row" style="margin-top:10px;">
+                            <div class="field-box">
+                                <label>المسار الافتراضي للدفعة</label>
+                                <select id="bulkSubjectSelect">
+                                    <option value="auto_js">تلقائي جافا (1ث / 2ث)</option>
+                                    <option value="java1">أولى ثانوي — جافا (42)</option>
+                                    <option value="java2">تانية ثانوي — جافا (54)</option>
+                                    <option value="python2">تانية ثانوي — بايثون (25)</option>
+                                </select>
+                            </div>
+                            <div class="field-box" style="display:flex; align-items:flex-end;">
+                                <button type="button" id="parseBulkBtn" class="btn btn-soft" style="width:100%;">
+                                    <span>✨</span> تحليل وفحص القائمة
                                 </button>
-                                <button type="button" class="btn-mini" id="btnAddRow">+ صف جديد</button>
-                                <button type="button" class="btn-mini btn-danger-soft" id="btnClearRows">مسح</button>
                             </div>
                         </div>
-
-                        <!-- Collapsible Smart Paste Box -->
-                        <div class="smart-paste-drawer hidden" id="smartPasteDrawer">
-                            <label for="bulkPasteText">الصق أي أسطر عشوائية (واتساب / Excel / نصوص) وسيتم فرزها تلقائياً في الجدول:</label>
-                            <textarea id="bulkPasteText" rows="4" placeholder="أحمد 475441535 123456&#10;470819199 Xfi7?T3h يوسف بايثون&#10;سارة | 477920943 | D?mcpAw6"></textarea>
-                            <div class="smart-paste-footer">
-                                <span class="hint">يدعم المسافات، Tab، | ، أو علامة : وأي ترتيب للاسم والكود والباسورد</span>
-                                <button type="button" class="btn-mini btn-accent" id="btnSmartParse">✨ تفريغ في الجدول</button>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Student Rows Table -->
-                        <div class="bulk-table-wrap">
-                            <table class="bulk-table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>الاسم (اختياري)</th>
-                                        <th>كود الطالب</th>
-                                        <th>كلمة المرور</th>
-                                        <th>المسار</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="bulkRowsBody"></tbody>
-                            </table>
-                        </div>
+                        <div id="parsedPreview" class="parsed-preview-box" style="display:none;"></div>
                     </div>
 
-                    <!-- Track / Subject Selection -->
-                    <div class="form-group mt-16">
-                        <label>المسار الدراسي الافتراضي <span class="hint">(تلقائي جافا يكتشف أولى 42 أو تانية 54 لوحده)</span></label>
-                        <div class="subject-grid" id="subjectGrid">
-                            <button type="button" class="subject-card selected" data-subject="auto_js">
-                                <div class="sub-head">
-                                    <span class="sub-icon">🤖</span>
-                                    <span class="sub-tag tag-auto">الافتراضي</span>
-                                </div>
-                                <div class="sub-name">جافا ذكي تلقائي</div>
-                                <div class="sub-meta">أولى (42) + تانية (54)</div>
-                            </button>
-
-                            <button type="button" class="subject-card" data-subject="python2">
-                                <div class="sub-head">
-                                    <span class="sub-icon">🐍</span>
-                                    <span class="sub-tag tag-py">تانية ثانوي</span>
-                                </div>
-                                <div class="sub-name">بايثون (Python)</div>
-                                <div class="sub-meta">25 فصلاً • المنهج القصير</div>
-                            </button>
-
-                            <button type="button" class="subject-card" data-subject="java1">
-                                <div class="sub-head">
-                                    <span class="sub-icon">☕</span>
-                                    <span class="sub-tag">أولى فقط</span>
-                                </div>
-                                <div class="sub-name">جافا أولى ثانوي</div>
-                                <div class="sub-meta">42 فصلاً • المحفوظة</div>
-                            </button>
-
-                            <button type="button" class="subject-card" data-subject="java2">
-                                <div class="sub-head">
-                                    <span class="sub-icon">⚡</span>
-                                    <span class="sub-tag">تانية فقط</span>
-                                </div>
-                                <div class="sub-name">جافا تانية ثانوي</div>
-                                <div class="sub-meta">54 فصلاً • المطور</div>
-                            </button>
-                        </div>
-
-                        <div class="coming-soon-strip">
-                            <span class="soon-chip">📊 الثقافة المالية SPX <small>(قريباً)</small></span>
-                            <span class="soon-chip">🇬🇧 مسار اللغات الإنجليزي <small>(قريباً)</small></span>
-                        </div>
-                    </div>
-
-                    <!-- Solve Scope Mode Selection -->
-                    <div class="form-group">
-                        <label>نطاق الحل المطلوب</label>
-                        <div class="mode-pills">
-                            <label class="mode-pill active" data-mode="full">
-                                <input type="radio" name="mode" value="full" checked>
-                                <span>🚀 المنهج بالكامل</span>
-                            </label>
-                            <label class="mode-pill" data-mode="range">
-                                <input type="radio" name="mode" value="range">
-                                <span>🔢 من فصل إلى فصل</span>
-                            </label>
-                            <label class="mode-pill" data-mode="single">
-                                <input type="radio" name="mode" value="single">
-                                <span>⚡ فصل واحد</span>
-                            </label>
-                        </div>
-
-                        <!-- Range Inputs (Hidden unless mode == range) -->
-                        <div class="scope-box hidden" id="rangeInputsBox">
-                            <div class="scope-field">
-                                <label for="chapterFromInput">من الفصل</label>
-                                <input type="number" id="chapterFromInput" min="1" max="60" value="1">
+                    <!-- Mode Cards -->
+                    <div class="section-label">اختر نمط الحل الحقيقي</div>
+                    <div class="mode-cards" id="modeCards">
+                        <button type="button" class="mode-card active" data-mode="real_full">
+                            <div class="mode-ico">📘</div>
+                            <div class="mode-txt">
+                                <strong>حل حقيقي كامل</strong>
+                                <span>كتابة أكواد الدروس + حل الاختبار</span>
                             </div>
-                            <span class="scope-arrow">←</span>
-                            <div class="scope-field">
-                                <label for="chapterToInput">إلى الفصل</label>
-                                <input type="number" id="chapterToInput" min="1" max="60" value="42">
-                            </div>
-                        </div>
-
-                        <!-- Single Chapter Input (Hidden unless mode == single) -->
-                        <div class="scope-box hidden" id="singleChapterBox">
-                            <div class="scope-field full-w">
-                                <label for="chapterNumInput">رقم الفصل المطلوب <span class="hint">(اتركه فارغاً لحل أول فصل غير مكتمل تلقائياً)</span></label>
-                                <input type="number" id="chapterNumInput" min="1" max="60" placeholder="تلقائي أو مثال: 7">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="action-buttons">
-                        <button type="submit" class="btn-primary" id="btnAddQueue">
-                            <span>🚀</span>
-                            <span id="btnAddLabel">أضف للطابور وابدأ الحل</span>
                         </button>
-                        <div class="control-row hidden" id="queueControlRow">
-                            <button type="button" class="btn-warning" id="btnSkipCurrent">⏭ تخطي الطالب الحالي</button>
-                            <button type="button" class="btn-danger" id="btnStopAll">🛑 إيقاف الطابور بالكامل</button>
+                        <button type="button" class="mode-card" data-mode="regrade_lectures">
+                            <div class="mode-ico">✍️</div>
+                            <div class="mode-txt">
+                                <strong>إعادة تصحيح الدروس</strong>
+                                <span>ملء الأكواد للحسابات المحلولة مسبقاً</span>
+                            </div>
+                        </button>
+                        <button type="button" class="mode-card" data-mode="real_range">
+                            <div class="mode-ico">🔢</div>
+                            <div class="mode-txt">
+                                <strong>نطاق فصول محدد</strong>
+                                <span>من فصل إلى فصل</span>
+                            </div>
+                        </button>
+                        <button type="button" class="mode-card" data-mode="real_single">
+                            <div class="mode-ico">🎯</div>
+                            <div class="mode-txt">
+                                <strong>فصل واحد</strong>
+                                <span>تجربة سريعة لفصل معين</span>
+                            </div>
+                        </button>
+                    </div>
+                    <input type="hidden" id="modeSelect" value="real_full">
+
+                    <div id="rangeInputs" class="fields-row" style="display:none; margin-top:10px;">
+                        <div class="field-box">
+                            <label>من فصل</label>
+                            <input type="number" id="chapterFromInput" min="1" max="60" value="1">
+                        </div>
+                        <div class="field-box">
+                            <label>إلى فصل</label>
+                            <input type="number" id="chapterToInput" min="1" max="60" value="5">
                         </div>
                     </div>
-                </form>
 
-                <div class="toast-msg hidden" id="formToast"></div>
+                    <div id="singleChapterInputWrap" class="field-box" style="display:none; margin-top:10px;">
+                        <label>رقم الفصل المستهدف</label>
+                        <input type="number" id="targetChapterInput" min="1" max="60" value="1">
+                    </div>
+
+                    <!-- Smart Options -->
+                    <div class="switches-card">
+                        <label class="switch-row">
+                            <input type="checkbox" id="realisticDelayCheck">
+                            <span class="switch-ui"></span>
+                            <div>
+                                <strong>⏱️ محاكاة مدة الحل الواقعية</strong>
+                                <small>فاصل زمني بشري بين التمارين (إلغاء التحديد = أقصى سرعة ⚡)</small>
+                            </div>
+                        </label>
+                        <label class="switch-row">
+                            <input type="checkbox" id="naturalModeCheck">
+                            <span class="switch-ui"></span>
+                            <div>
+                                <strong>🎯 وضع الحل الطبيعي للاختبار</strong>
+                                <small>درجة 4-5 ألماسات عشوائياً لتبدو طبيعية</small>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn btn-primary-glow">
+                        <span>🚀</span>
+                        <span>إضافة وبدء التنفيذ الحقيقي</span>
+                    </button>
+                </form>
             </section>
 
-            <!-- Left Column (RTL): Active Hero + Queue Board + Terminal & Preview -->
-            <div class="dashboard-stack">
-                <!-- Active Solving Hero Card -->
-                <section class="panel glass-card active-hero" id="activeHeroCard">
-                    <div class="hero-top">
-                        <div class="hero-identity">
-                            <span class="hero-state-badge idle" id="heroStateBadge">متوقف / جاهز</span>
-                            <h2 id="heroTitle">لا يوجد طالب قيد الحل الآن</h2>
-                            <p id="heroSub" class="hero-sub">أضف طالباً أو مجموعة طلاب (أولى وتانية معاً) وسيتولى المحرك تشغيلهم بالتتابع تلقائياً.</p>
+            <!-- Left Panel: Queue & Live Monitor -->
+            <section class="right-stack">
+                <!-- Queue Card -->
+                <div class="card queue-panel">
+                    <div class="panel-header">
+                        <div class="panel-title-wrap">
+                            <h2>📋 طابور التنفيذ</h2>
+                            <span class="pill-count" id="queueTotalCount">0</span>
                         </div>
-                        <div class="hero-timer-box">
-                            <span class="timer-label">مدة الجلسة</span>
-                            <strong id="heroTimer" class="timer-val">00:00</strong>
-                        </div>
-                    </div>
-
-                    <div class="hero-progress-wrap">
-                        <div class="progress-meta">
-                            <span id="heroStageText">في انتظار أوامر التشغيل...</span>
-                            <strong id="heroProgressCount">0 / 0 فصل (0%)</strong>
-                        </div>
-                        <div class="progress-track">
-                            <div class="progress-fill" id="heroProgressBar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Queue Board: Waiting & Finished -->
-                <section class="panel glass-card queue-board">
-                    <div class="board-tabs">
-                        <button type="button" class="board-tab active" data-board="waiting" id="boardTabWaiting">
-                            <span>⏳ قائمة الانتظار</span>
-                            <span class="count-badge" id="waitingBadge">0</span>
-                        </button>
-                        <button type="button" class="board-tab" data-board="finished" id="boardTabFinished">
-                            <span>📁 السجل المنتهي</span>
-                            <span class="count-badge" id="finishedBadge">0</span>
-                        </button>
-                        <button type="button" class="btn-clear-finished hidden" id="btnClearFinished" title="حذف الطلبات المنتهية فقط">
-                            🧹 مسح المنتهي
-                        </button>
-                    </div>
-
-                    <div class="board-list" id="queuedList"></div>
-                    <div class="board-list hidden" id="finishedList"></div>
-                </section>
-
-                <!-- Terminal + Toggleable Live Browser Preview -->
-                <section class="panel glass-card terminal-card">
-                    <div class="terminal-header">
-                        <div class="term-title">
-                            <span class="term-dot"></span>
-                            <span>سجل التشغيل المباشر:</span>
-                            <strong id="terminalJobTitle">الجلسة الحالية</strong>
-                        </div>
-                        <div class="term-actions">
-                            <button type="button" class="btn-mini btn-accent-soft" id="btnTogglePreview">
-                                🖥️ معاينة المتصفح
-                            </button>
-                            <button type="button" class="btn-mini" id="btnClearLogs">مسح العرض</button>
+                        <div class="queue-actions">
+                            <button type="button" id="retryFailedBtn" class="btn btn-xs btn-soft" title="إعادة تشغيل المهام الفاشلة أو المتوقفة">🔄 إعادة الأخطاء</button>
+                            <button type="button" id="copyDoneBtn" class="btn btn-xs btn-soft" title="نسخ ملخص الطلاب المكتملين">📋 نسخ التقرير</button>
+                            <button type="button" id="stopAllBtn" class="btn btn-xs btn-danger">⏹ إيقاف</button>
+                            <button type="button" id="clearDoneBtn" class="btn btn-xs btn-ghost">🧹 مسح المنتهي</button>
                         </div>
                     </div>
 
-                    <!-- Collapsible Live Screenshot Drawer -->
-                    <div class="preview-drawer hidden" id="previewDrawer">
+                    <div class="queue-toolbar">
+                        <div class="filter-pills" id="queueFilters">
+                            <button type="button" class="filter-pill active" data-filter="all">الكل</button>
+                            <button type="button" class="filter-pill" data-filter="running">شغال</button>
+                            <button type="button" class="filter-pill" data-filter="queued">انتظار</button>
+                            <button type="button" class="filter-pill" data-filter="done">مكتمل</button>
+                            <button type="button" class="filter-pill" data-filter="error">أخطاء</button>
+                        </div>
+                        <input type="search" id="queueSearch" class="search-mini" placeholder="🔍 بحث بالاسم أو الكود...">
+                    </div>
+
+                    <div id="queueList" class="queue-list"></div>
+                </div>
+
+                <!-- Live Monitor Card -->
+                <div class="card monitor-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2 id="monitorTitle">🖥️ مراقبة المحرك المباشرة</h2>
+                            <div id="monitorStage" class="monitor-stage">في انتظار إضافة طالب للبدء...</div>
+                        </div>
+                        <div class="monitor-actions">
+                            <span id="monitorProgressText" class="progress-badge mono">0 / 0</span>
+                            <button type="button" id="proofBtn" class="btn btn-xs btn-emerald" style="display:none;">📸 إثبات الحل</button>
+                            <button type="button" id="openBrowserBtn" class="btn btn-xs btn-soft" style="display:none;">🌐 فتح المتصفح</button>
+                        </div>
+                    </div>
+
+                    <div class="progress-track">
+                        <div id="monitorProgressFill" class="progress-fill" style="width:0%;"></div>
+                    </div>
+
+                    <div class="monitor-split">
+                        <div id="logBox" class="terminal-box">
+                            <div class="log-muted">السجل المباشر جاهز — أضف طالباً أو دفعة طلاب لبدء التنفيذ الحقيقي...</div>
+                        </div>
                         <div class="preview-box">
-                            <img id="livePreviewImg" alt="لقطة المتصفح المباشرة" class="hidden">
-                            <div id="previewEmpty" class="preview-empty">
-                                <span>📡 لا توجد لقطة نشطة حالياً — ستظهر تلقائياً عند بدء الحل</span>
+                            <div class="preview-head">📸 لقطة حية من المتصفح</div>
+                            <div class="preview-frame">
+                                <img id="liveScreenshot" src="" alt="" style="display:none;">
+                                <span id="noScreenshotMsg">تظهر اللقطة تلقائياً أثناء التشغيل</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="terminal-body" id="terminalLog">
-                        <div class="log-line muted">جاهز لاستقبال الطلاب... أضف طالباً أو استورد مجموعة لبدء التنفيذ التسلسلي.</div>
-                    </div>
-                </section>
-            </div>
+                </div>
+            </section>
         </main>
     </div>
 
+    <!-- Proof Modal -->
+    <div id="proofModal" class="modal-backdrop" style="display:none;">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h3>📸 إثبات الحل الحقيقي</h3>
+                <div style="display:flex; gap:8px;">
+                    <button type="button" id="copyWhatsappBtn" class="btn btn-xs btn-emerald">📲 نسخ تقرير واتساب</button>
+                    <button type="button" id="closeProofBtn" class="btn btn-xs btn-ghost">✕ إغلاق</button>
+                </div>
+            </div>
+            <div id="proofStatsBox" class="proof-stats"></div>
+            <div class="proof-images">
+                <img id="proofCourseImg" src="" style="display:none;">
+                <img id="proofSectionImg" src="" style="display:none;">
+            </div>
+        </div>
+    </div>
+
+    <div id="toastBox" class="toast-container"></div>
     <script src="/static/app.js"></script>
 </body>
 </html>
